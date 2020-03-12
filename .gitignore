@@ -1,0 +1,5 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ScheduleControl/.vs/ScheduleControl/v16/Server/sqlite3
