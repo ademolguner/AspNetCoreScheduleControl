@@ -1,0 +1,17 @@
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\bin\Debug\netcoreapp3.1\ScheduleControl.Business.dll
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\bin\Debug\netcoreapp3.1\ScheduleControl.Core.dll
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\bin\Debug\netcoreapp3.1\ScheduleControl.DataAccess.dll
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\bin\Debug\netcoreapp3.1\ScheduleControl.Entities.dll
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\obj\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.csprojAssemblyReference.cache
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\obj\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.AssemblyInfoInputs.cache
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\obj\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.AssemblyInfo.cs
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\bin\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.deps.json
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\bin\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.dll
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\bin\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.pdb
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\bin\Debug\netcoreapp3.1\ScheduleControl.Business.pdb
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\bin\Debug\netcoreapp3.1\ScheduleControl.Core.pdb
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\bin\Debug\netcoreapp3.1\ScheduleControl.DataAccess.pdb
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\bin\Debug\netcoreapp3.1\ScheduleControl.Entities.pdb
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\obj\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.csproj.CopyComplete
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\obj\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.dll
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\obj\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.pdb

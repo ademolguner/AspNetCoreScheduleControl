@@ -8,6 +8,11 @@
     <PackageReference Include="Hangfire" Version="1.7.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ScheduleControl.BackgroundJob\ScheduleControl.BackgroundJob.csproj" />
+    <ProjectReference Include="..\ScheduleControl.Business\ScheduleControl.Business.csproj" />
+  </ItemGroup>
+
 
 
 </Project>

@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Hangfire;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ScheduleControl.BackgroundJob;
+using ScheduleControl.BackgroundJob.Abstract;
+using ScheduleControl.BackgroundJob.Schedules;
+using ScheduleControl.Business.Abstract;
+using ScheduleControl.Business.Concrete.Managers;
+using ScheduleControl.DataAccess.Abstract;
+using ScheduleControl.DataAccess.Concrete.EntityFramework;
+using ScheduleControl.DataAccess.Concrete.EntityFramework.Context;
 
 namespace ScheduleControl.WebUI
 {
@@ -27,12 +37,38 @@ namespace ScheduleControl.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHangfire(_ => _.UseSqlServerStorage(Configuration["ConnectionStrings:ScheduleProjectDb"]));
+            
+            var connectionString = Configuration["ConnectionStrings:ScheduleProjectDb"];
+            services.AddDbContext<ScheduleProjectDbContext>(option => option.UseSqlServer(connectionString));
+
+            //services.AddHangfire(_ => _.UseSqlServerStorage(Configuration["ConnectionStrings:ScheduleProjectDb"]));
+            services.AddHangfire(config =>
+            {
+                var option = new SqlServerStorageOptions
+                {
+                    PrepareSchemaIfNecessary = false,
+                    QueuePollInterval = TimeSpan.FromMinutes(5)
+                };
+                config.UseSqlServerStorage(connectionString, option);
+            });
+
+
+
+
+            // dependency
+            services.AddScoped<ICurrencyService, CurrencyManager>();
+            services.AddScoped<ICurrencyDal, EfCurrencyDal>();
+
+            // Schedule servisi
+            services.AddScoped<IEmailSendingSchedule, EmailSendingScheduleJob>();
+            services.AddScoped<ICurrencySchedule, CurrencyScheduleJob>();
+
 
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        [Obsolete]
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -47,10 +83,24 @@ namespace ScheduleControl.WebUI
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseHangfireDashboard();
-            app.UseHangfireServer();
-            app.UseRouting();
 
+
+            //app.UseHangfireDashboard();
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions
+            {
+                Authorization = new[] {new HangfireDashboardAuthorizationFilter()}
+            });
+            //app.UseHangfireServer();
+            app.UseHangfireServer(new BackgroundJobServerOptions
+            {
+                WorkerCount = 1
+            });
+
+             
+
+
+
+            app.UseRouting(); 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -59,6 +109,10 @@ namespace ScheduleControl.WebUI
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute{Attempts = 0});
+            HangfireJobScheduler.ScheduleRecurringJob();
+
         }
     }
 }

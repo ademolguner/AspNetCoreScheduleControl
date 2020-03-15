@@ -1,0 +1,10 @@
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.WebAPI\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.WebAPI\bin\Debug\netcoreapp3.1\appsettings.json
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.WebAPI\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.WebAPI\bin\Debug\netcoreapp3.1\ScheduleControl.WebAPI.exe
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.WebAPI\obj\Debug\netcoreapp3.1\ScheduleControl.WebAPI.csprojAssemblyReference.cache
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.WebAPI\obj\Debug\netcoreapp3.1\staticwebassets\ScheduleControl.WebAPI.StaticWebAssets.Manifest.cache
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.WebAPI\obj\Debug\netcoreapp3.1\staticwebassets\ScheduleControl.WebAPI.StaticWebAssets.xml
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.WebAPI\obj\Debug\netcoreapp3.1\ScheduleControl.WebAPI.AssemblyInfoInputs.cache
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.WebAPI\obj\Debug\netcoreapp3.1\ScheduleControl.WebAPI.AssemblyInfo.cs
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.WebAPI\obj\Debug\netcoreapp3.1\ScheduleControl.WebAPI.RazorTargetAssemblyInfo.cache

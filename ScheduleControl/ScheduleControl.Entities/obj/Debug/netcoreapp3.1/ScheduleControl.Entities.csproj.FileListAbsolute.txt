@@ -1,0 +1,11 @@
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Entities\bin\Debug\netcoreapp3.1\ScheduleControl.Entities.deps.json
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Entities\bin\Debug\netcoreapp3.1\ScheduleControl.Entities.dll
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Entities\bin\Debug\netcoreapp3.1\ScheduleControl.Entities.pdb
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Entities\bin\Debug\netcoreapp3.1\ScheduleControl.Core.dll
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Entities\bin\Debug\netcoreapp3.1\ScheduleControl.Core.pdb
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Entities\obj\Debug\netcoreapp3.1\ScheduleControl.Entities.csprojAssemblyReference.cache
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Entities\obj\Debug\netcoreapp3.1\ScheduleControl.Entities.AssemblyInfoInputs.cache
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Entities\obj\Debug\netcoreapp3.1\ScheduleControl.Entities.AssemblyInfo.cs
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Entities\obj\Debug\netcoreapp3.1\ScheduleControl.Entities.csproj.CopyComplete
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Entities\obj\Debug\netcoreapp3.1\ScheduleControl.Entities.dll
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Entities\obj\Debug\netcoreapp3.1\ScheduleControl.Entities.pdb
