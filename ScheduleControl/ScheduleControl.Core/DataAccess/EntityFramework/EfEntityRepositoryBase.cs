@@ -40,7 +40,7 @@ namespace ScheduleControl.Core.DataAccess.EntityFramework
             }
         }
 
-        public IList<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
+        public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new TContext())
             {
