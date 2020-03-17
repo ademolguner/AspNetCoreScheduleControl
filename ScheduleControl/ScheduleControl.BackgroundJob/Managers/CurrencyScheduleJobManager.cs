@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.Extensions.Logging;
 using ScheduleControl.BackgroundJob.Abstract;
 using ScheduleControl.Business.Abstract;
 
-namespace ScheduleControl.BackgroundJob.Schedules
+namespace ScheduleControl.BackgroundJob.Managers
 {
-    public class CurrencyScheduleJob : ISchedulerJob// ICurrencySchedule
+    public class CurrencyScheduleJobManager : ISchedulerJob
     {
        
-        private ILogger<CurrencyScheduleJob> _logger;
+        private ILogger<CurrencyScheduleJobManager> _logger;
         private readonly ICurrencyService _currencyService;
 
-        public CurrencyScheduleJob(ILogger<CurrencyScheduleJob> logger, ICurrencyService currencyService)
+        public CurrencyScheduleJobManager(ILogger<CurrencyScheduleJobManager> logger, ICurrencyService currencyService)
         {
             _logger = logger;
             _currencyService = currencyService;

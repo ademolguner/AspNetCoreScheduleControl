@@ -8,13 +8,13 @@ using Hangfire;
 using Microsoft.Extensions.Logging;
 using ScheduleControl.BackgroundJob.Abstract;
 
-namespace ScheduleControl.BackgroundJob.Schedules
+namespace ScheduleControl.BackgroundJob.Managers
 {
-    public class EmailSendingScheduleJob : ISchedulerJob//IEmailSendingSchedule
+    public class EmailSendingScheduleJobManager : ISchedulerJob//IEmailSendingSchedule
     {
-        private ILogger<EmailSendingScheduleJob> _logger;
+        private ILogger<EmailSendingScheduleJobManager> _logger;
 
-        public EmailSendingScheduleJob(ILogger<EmailSendingScheduleJob> logger)
+        public EmailSendingScheduleJobManager(ILogger<EmailSendingScheduleJobManager> logger)
         {
             _logger = logger;
         }

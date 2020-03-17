@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Hangfire;
 using ScheduleControl.BackgroundJob.Abstract;
 
-namespace ScheduleControl.BackgroundJob.Schedules
+namespace ScheduleControl.BackgroundJob.Managers
 {
-   public  class DataBaseBackupScheduleJob: ISchedulerJob
+   public  class DataBaseBackupScheduleJobManager: ISchedulerJob
     {
         public Task Run(IJobCancellationToken token)
         {

@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Hangfire;
+using ScheduleControl.BackgroundJob.Managers;
 using ScheduleControl.BackgroundJob.Schedules;
 
-namespace ScheduleControl.BackgroundJob.Managers
+namespace ScheduleControl.BackgroundJob.Schedules
 {
-    public static class DelayedJobManager
+    public static class DelayedJobs
     {
 
          
         [Obsolete]
         public static void CreatedDailyReport()
         {
-             Hangfire.BackgroundJob.Schedule<DataBaseBackupScheduleJob>
+             Hangfire.BackgroundJob.Schedule<DataBaseBackupScheduleJobManager>
                   (
                    job => job.Run(JobCancellationToken.Null), 
                    TimeSpan.FromSeconds(10)

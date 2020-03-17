@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ScheduleControl.BackgroundJob.Managers
+namespace ScheduleControl.BackgroundJob.Schedules
 {
-    public static class ContinuationJobManager
+    public static class ContinuationJobs
     {
 
         [Obsolete]

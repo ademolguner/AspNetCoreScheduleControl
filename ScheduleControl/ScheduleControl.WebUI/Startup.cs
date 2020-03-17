@@ -113,7 +113,7 @@ namespace ScheduleControl.WebUI
             GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute{Attempts = 0});
 
             // ilk basta tanımlayabiliriz.
-            BackgroundJob.Managers.RecurringJobManager.CheckCurrencyDataRefresh();
+            BackgroundJob.Managers.RecurringJobs.CheckCurrencyDataRefresh();
 
         }
     }
