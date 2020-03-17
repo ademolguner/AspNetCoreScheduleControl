@@ -9,9 +9,9 @@ using ScheduleControl.Business.Abstract;
 
 namespace ScheduleControl.BackgroundJob.Schedules
 {
-    public class CurrencyScheduleJob : ICurrencySchedule
+    public class CurrencyScheduleJob : ISchedulerJob// ICurrencySchedule
     {
-        //  api katmanı olusturup call edilecek
+       
         private ILogger<CurrencyScheduleJob> _logger;
         private readonly ICurrencyService _currencyService;
 
@@ -24,10 +24,10 @@ namespace ScheduleControl.BackgroundJob.Schedules
         public async Task Run(IJobCancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-            await RunArTimeOf(DateTime.Now);
+            await Process(DateTime.Now);
         }
 
-        public async Task RunArTimeOf(DateTime nowDateTime)
+        public async Task Process(DateTime? nowDateTime)
         {
             var lists = await _currencyService.GetCurrencyApiCall();
             foreach (var itemCurrency in lists)
@@ -46,5 +46,6 @@ namespace ScheduleControl.BackgroundJob.Schedules
             }
         }
 
+         
     }
 }

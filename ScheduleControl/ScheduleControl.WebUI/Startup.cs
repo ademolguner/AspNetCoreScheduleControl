@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ScheduleControl.BackgroundJob;
 using ScheduleControl.BackgroundJob.Abstract;
+using ScheduleControl.BackgroundJob.Managers;
 using ScheduleControl.BackgroundJob.Schedules;
 using ScheduleControl.Business.Abstract;
 using ScheduleControl.Business.Concrete.Managers;
@@ -60,8 +61,7 @@ namespace ScheduleControl.WebUI
             services.AddScoped<ICurrencyDal, EfCurrencyDal>();
 
             // Schedule servisi
-            services.AddScoped<IEmailSendingSchedule, EmailSendingScheduleJob>();
-            services.AddScoped<ICurrencySchedule, CurrencyScheduleJob>();
+           
 
 
             services.AddControllersWithViews();
@@ -111,7 +111,9 @@ namespace ScheduleControl.WebUI
             });
 
             GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute{Attempts = 0});
-            HangfireJobScheduler.ScheduleRecurringJob();
+
+            // ilk basta tanımlayabiliriz.
+            BackgroundJob.Managers.RecurringJobManager.CheckCurrencyDataRefresh();
 
         }
     }

@@ -10,7 +10,7 @@ using ScheduleControl.BackgroundJob.Abstract;
 
 namespace ScheduleControl.BackgroundJob.Schedules
 {
-    public class EmailSendingScheduleJob : IEmailSendingSchedule
+    public class EmailSendingScheduleJob : ISchedulerJob//IEmailSendingSchedule
     {
         private ILogger<EmailSendingScheduleJob> _logger;
 
@@ -19,13 +19,15 @@ namespace ScheduleControl.BackgroundJob.Schedules
             _logger = logger;
         }
 
+        
+
         public async Task Run(IJobCancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-            await SendingAsync(new MailMessage());
+            await Process(DateTime.Now);
         }
 
-        public async Task SendingAsync(MailMessage mailMessage)
+        public async Task Process(DateTime? dateTime)
         {
             SmtpClient sc = new SmtpClient();
             sc.Port = 587;

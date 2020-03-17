@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Hangfire;
 
 namespace ScheduleControl.BackgroundJob.Abstract
 {
-   public interface ICurrencySchedule
+   public  interface ISchedulerJob
    {
-       Task RunArTimeOf(DateTime nowDateTime);
+       Task Run(IJobCancellationToken token);
+       Task Process(DateTime? dateTime);
    }
 }
