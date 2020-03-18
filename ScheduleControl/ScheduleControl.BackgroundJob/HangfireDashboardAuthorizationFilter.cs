@@ -13,7 +13,7 @@ namespace ScheduleControl.BackgroundJob
         public bool Authorize([NotNull]DashboardContext context)
         {
             var httpContext = context.GetHttpContext();
-            var useRole = "WebMaster";// httpContext.User.FindFirst(ClaimTypes.Role)?.Value;
+            var useRole = "WebMaster";//httpContext.User.FindFirst(ClaimTypes.Role)?.Value;//"WebMaster";//
             return useRole == AppRoles.RoleEnums.WebMaster.ToString();
         }
     }

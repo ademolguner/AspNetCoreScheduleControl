@@ -7,9 +7,12 @@ using ScheduleControl.BackgroundJob.Schedules;
 
 namespace ScheduleControl.BackgroundJob.Schedules
 {
+    /// <summary>
+    /// Çok kez (tekrarlı işler) ve belirtilmiş CRON süresince çalışır
+    /// </summary>
     public static class RecurringJobs
     {
-
+       
         [Obsolete]
         public static void CheckCurrencyDataRefresh()
         {

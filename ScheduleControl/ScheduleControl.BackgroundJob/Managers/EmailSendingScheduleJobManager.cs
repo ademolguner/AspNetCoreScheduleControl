@@ -3,62 +3,67 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.Extensions.Logging;
 using ScheduleControl.BackgroundJob.Abstract;
+using ScheduleControl.Business.Abstract.Mail;
+using ScheduleControl.Entities.Dtos.Mail;
 
 namespace ScheduleControl.BackgroundJob.Managers
 {
-    public class EmailSendingScheduleJobManager : ISchedulerJob//IEmailSendingSchedule
+    public  class EmailSendingScheduleJobManager : ISchedulerJob
     {
-        private ILogger<EmailSendingScheduleJobManager> _logger;
-
-        public EmailSendingScheduleJobManager(ILogger<EmailSendingScheduleJobManager> logger)
+        private readonly IMailService _mailService;
+        public EmailSendingScheduleJobManager(IMailService mailService)
         {
-            _logger = logger;
-        }
-
-        
-
+            _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
+        }   
         public async Task Run(IJobCancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-            await Process(DateTime.Now);
+            await Process();
         }
 
-        public async Task Process(DateTime? dateTime)
+        public async Task Process()
         {
-            SmtpClient sc = new SmtpClient();
-            sc.Port = 587;
-            sc.Host = "smtp.gmail.com";
-            sc.EnableSsl = true;
-            sc.Credentials = new NetworkCredential("ademolguner@gmail.com", "SampiyonBesiktas1903");
 
-            MailMessage mail = new MailMessage();
-
-            mail.From = new MailAddress("ademolguner@gmail.com", "Adem Hangfire Mail");
-
-            mail.To.Add("ademolguner@gmail.com");
-            mail.CC.Add("ademolguner@gmail.com");
-
-            mail.Subject = "Adem Medium Hangfire Mail";
-            mail.IsBodyHtml = true;
-            mail.Body = "Adem Medium Hangfire Mail E-Posta İçeriği";
-
-            //mail.Attachments.Add(new Attachment(@"C:\Rapor.xlsx"));
-            //mail.Attachments.Add(new Attachment(@"C:\Sonuc.pptx"));
-            try
+           await _mailService.SendMailAsync(new MailMessageDto
             {
-                sc.Send(mail);
-                await Task.FromResult("Mail Gönderildi");
-            }
-            catch (Exception)
-            {
-                await Task.FromException(new Exception("Mail Gönderildiği esnada hata oldu"));
-            }
+                Body = "Adem Medium Hangfire Mail E-Posta İçeriği",
+                To = "ademolguner@gmail.com",
+                Subject = "Adem Medium Hangfire Mail",
+                From="ademolguner@gmail.com"
+            });
 
-            //throw new NotImplementedException();
+            //SmtpClient sc = new SmtpClient
+            //{
+            //    Port = 587,
+            //    Host = "smtp.gmail.com",
+            //    EnableSsl = true,
+            //    Credentials = new NetworkCredential("denemebir@mail.com", "mailsifre")
+            //};
+
+            //MailMessage mail = new MailMessage();
+
+            //mail.From = new MailAddress("ademolguner@gmail.com", "Adem Hangfire Mail");
+
+            //mail.To.Add("ademolguner@gmail.com");
+            //mail.CC.Add("ademolguner@gmail.com");
+
+            //mail.Subject = "Adem Medium Hangfire Mail";
+            //mail.IsBodyHtml = true;
+            //mail.Body = "Adem Medium Hangfire Mail E-Posta İçeriği";
+            //try
+            //{
+            //    sc.Send(mail);
+            //    await Task.FromResult("Mail Gönderildi");
+            //}
+            //catch (Exception)
+            //{
+            //    await Task.FromException(new Exception("Mail Gönderildiği esnada hata oldu"));
+            //}
         }
     }
 }

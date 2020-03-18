@@ -10,6 +10,9 @@ using ScheduleControl.BackgroundJob.Schedules;
 
 namespace ScheduleControl.BackgroundJob.Schedules
 {
+    /// <summary>
+    /// Bir keree ve hemen çalışan background job tipidir.
+    /// </summary>
     public static class FireAndForgetJobs
     {
         

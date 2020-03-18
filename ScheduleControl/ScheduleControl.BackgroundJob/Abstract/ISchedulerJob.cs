@@ -9,6 +9,6 @@ namespace ScheduleControl.BackgroundJob.Abstract
    public  interface ISchedulerJob
    {
        Task Run(IJobCancellationToken token);
-       Task Process(DateTime? dateTime);
+       Task Process();
    }
 }

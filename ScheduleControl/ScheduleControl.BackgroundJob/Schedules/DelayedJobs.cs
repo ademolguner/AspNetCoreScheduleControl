@@ -8,6 +8,9 @@ using ScheduleControl.BackgroundJob.Schedules;
 
 namespace ScheduleControl.BackgroundJob.Schedules
 {
+    /// <summary>
+    /// Oluşturulduktan belirli bir zaman sonra (ayarlanan) sadece tek seferliğine çalışan job türüdür.
+    /// </summary>
     public static class DelayedJobs
     {
 

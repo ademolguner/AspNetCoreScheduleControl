@@ -7,7 +7,7 @@ using ScheduleControl.Business.Abstract;
 
 namespace ScheduleControl.BackgroundJob.Managers
 {
-    public class CurrencyScheduleJobManager : ISchedulerJob
+    public  class CurrencyScheduleJobManager : ISchedulerJob
     {
        
         private ILogger<CurrencyScheduleJobManager> _logger;
@@ -22,10 +22,10 @@ namespace ScheduleControl.BackgroundJob.Managers
         public async Task Run(IJobCancellationToken token)
         {
             token.ThrowIfCancellationRequested();
-            await Process(DateTime.Now);
+            await Process();
         }
 
-        public async Task Process(DateTime? nowDateTime)
+        public async Task Process()
         {
             var lists = await _currencyService.GetCurrencyApiCall();
             foreach (var itemCurrency in lists)

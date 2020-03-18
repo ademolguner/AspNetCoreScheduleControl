@@ -9,12 +9,13 @@ namespace ScheduleControl.BackgroundJob.Managers
 {
    public  class DataBaseBackupScheduleJobManager: ISchedulerJob
     {
-        public Task Run(IJobCancellationToken token)
+        public async Task Run(IJobCancellationToken token)
         {
-            throw new NotImplementedException();
+            token.ThrowIfCancellationRequested();
+            await Process();
         }
 
-        public Task Process(DateTime? dateTime)
+        public  Task Process()
         {
             throw new NotImplementedException();
         }

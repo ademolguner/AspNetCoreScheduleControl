@@ -5,7 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ScheduleControl.WebUI.Models;
+using ScheduleControl.BackgroundJob.Schedules;
+using ScheduleControl.WebUI.Models; 
 
 namespace ScheduleControl.WebUI.Controllers
 {
@@ -18,8 +19,11 @@ namespace ScheduleControl.WebUI.Controllers
             _logger = logger;
         }
 
+        [Obsolete]
         public IActionResult Index()
         {
+            // bir takım işlemler ve sponrasında mail tetikleniyor
+            FireAndForgetJobs.SendMailJobs();
             return View();
         }
 

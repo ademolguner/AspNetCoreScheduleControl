@@ -4,7 +4,10 @@ namespace ScheduleControl.BackgroundJob.Schedules
 {
     public static class ContinuationJobs
     {
-
+        /// <summary>
+        /// Bir kere ve hemen çalışan job türüdür.
+        /// </summary>
+        /// <param name="id"></param>
         [Obsolete]
         public static void ExampleOneSynchronization(string id)
         {
