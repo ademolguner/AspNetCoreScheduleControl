@@ -22,13 +22,14 @@ using ScheduleControl.Business.Concrete.Managers.Mail;
 using ScheduleControl.DataAccess.Abstract;
 using ScheduleControl.DataAccess.Concrete.EntityFramework;
 using ScheduleControl.DataAccess.Concrete.EntityFramework.Context;
+using ScheduleControl.Entities.Dtos.Database;
 using ScheduleControl.Entities.Dtos.Mail;
 
 namespace ScheduleControl.WebUI
 {
- 
-  
- 
+
+
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -41,7 +42,7 @@ namespace ScheduleControl.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             var connectionString = Configuration["ConnectionStrings:ScheduleProjectDb"];
             services.AddDbContext<ScheduleProjectDbContext>(option => option.UseSqlServer(connectionString));
 
@@ -66,7 +67,7 @@ namespace ScheduleControl.WebUI
 
             // configuration options
             services.Configure<SmtpConfigDto>(Configuration.GetSection("SmtpConfig"));
-
+            services.Configure<DatabaseOptionDto>(Configuration.GetSection("DatabaseOption"));
 
 
             // Schedule servisi
@@ -97,7 +98,7 @@ namespace ScheduleControl.WebUI
             //app.UseHangfireDashboard();
             app.UseHangfireDashboard("/hangfire", new DashboardOptions
             {
-                Authorization = new[] {new HangfireDashboardAuthorizationFilter()}
+                Authorization = new[] { new HangfireDashboardAuthorizationFilter() }
             });
             //app.UseHangfireServer();
             app.UseHangfireServer(new BackgroundJobServerOptions
@@ -105,11 +106,11 @@ namespace ScheduleControl.WebUI
                 WorkerCount = 1
             });
 
-             
 
 
 
-            app.UseRouting(); 
+
+            app.UseRouting();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -119,7 +120,7 @@ namespace ScheduleControl.WebUI
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute{Attempts = 0});
+            GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute { Attempts = 0 });
 
             // ilk basta tanımlayabiliriz.
             BackgroundJob.Schedules.RecurringJobs.CheckCurrencyDataRefresh();
