@@ -32,7 +32,16 @@ namespace ScheduleControl.Business.Concrete.Managers
 
         public Currency GetCurrencyCode(string code)
         {
-            return _currencyDal.Get(c => c.Code == code);
+            try
+            {
+                var data = _currencyDal.Get(c => c.Code == code);
+                return data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public void Add(Currency currency)
@@ -58,10 +67,10 @@ namespace ScheduleControl.Business.Concrete.Managers
                 {
                     Name = itemRow.ItemArray[1].ToString(),
                     Code = itemRow.ItemArray[2].ToString(),
-                    ForexBuying = Convert.ToDecimal(itemRow.ItemArray[3]),
-                    ForexSelling = Convert.ToDecimal(itemRow.ItemArray[4]),
-                    BanknoteBuying = Convert.ToDecimal(itemRow.ItemArray[5]),
-                    BanknoteSelling = Convert.ToDecimal(itemRow.ItemArray[6]),
+                    ForexBuying = string.IsNullOrEmpty(itemRow.ItemArray[3].ToString())!=true? Convert.ToDecimal(itemRow.ItemArray[3]):0,
+                    ForexSelling = string.IsNullOrEmpty(itemRow.ItemArray[4].ToString()) != true ? Convert.ToDecimal(itemRow.ItemArray[4]):0,
+                    BanknoteBuying = string.IsNullOrEmpty(itemRow.ItemArray[5].ToString()) != true ? Convert.ToDecimal(itemRow.ItemArray[5]):0,
+                    BanknoteSelling = string.IsNullOrEmpty(itemRow.ItemArray[6].ToString()) != true ? Convert.ToDecimal(itemRow.ItemArray[6]):0,
                     LastUpdateTime = DateTime.Now
                 });
             }

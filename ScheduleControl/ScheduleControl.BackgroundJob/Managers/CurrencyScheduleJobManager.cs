@@ -9,13 +9,11 @@ namespace ScheduleControl.BackgroundJob.Managers
 {
     public  class CurrencyScheduleJobManager : ISchedulerJob
     {
-       
-        private ILogger<CurrencyScheduleJobManager> _logger;
+        
         private readonly ICurrencyService _currencyService;
 
-        public CurrencyScheduleJobManager(ILogger<CurrencyScheduleJobManager> logger, ICurrencyService currencyService)
-        {
-            _logger = logger;
+        public CurrencyScheduleJobManager(ICurrencyService currencyService)
+        { 
             _currencyService = currencyService;
         }
 

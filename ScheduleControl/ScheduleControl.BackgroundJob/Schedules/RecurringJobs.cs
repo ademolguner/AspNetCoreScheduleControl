@@ -19,7 +19,8 @@ namespace ScheduleControl.BackgroundJob.Schedules
             RecurringJob.RemoveIfExists(nameof(CurrencyScheduleJobManager));
             RecurringJob.AddOrUpdate<CurrencyScheduleJobManager>(nameof(CurrencyScheduleJobManager),
                 job => job.Run(JobCancellationToken.Null),
-                Cron.Daily(6), TimeZoneInfo.Local);
+                // Cron.Daily(6), TimeZoneInfo.Local);
+                Cron.MinuteInterval(2), TimeZoneInfo.Local);
         }
 
     }

@@ -22,7 +22,7 @@ namespace ScheduleControl.DataAccess.Concrete.EntityFramework.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=JsonWebToken;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=.;Database=ScheduleProjectDb;Trusted_Connection=true");
         }
 
         public DbSet<Currency> Currency { get; set; }
