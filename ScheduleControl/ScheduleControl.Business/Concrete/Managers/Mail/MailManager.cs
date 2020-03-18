@@ -17,20 +17,12 @@ namespace ScheduleControl.Business.Concrete.Managers.Mail
         }
 
         public async Task SendMailAsync(MailMessageDto mailMessageDto)
-        {
-            try
-            {
+        { 
                 MailMessage mailMessage = mailMessageDto.GetMailMessage();
                 mailMessage.From = new MailAddress(_smtpConfigDto.User);
 
                 using var client = CreateSmtpClient();
                 await client.SendMailAsync(mailMessage);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
         }
 
         private SmtpClient CreateSmtpClient()
