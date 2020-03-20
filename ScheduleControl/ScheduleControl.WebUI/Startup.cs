@@ -16,8 +16,12 @@ using ScheduleControl.BackgroundJob.Abstract;
 using ScheduleControl.BackgroundJob.Managers;
 using ScheduleControl.BackgroundJob.Schedules;
 using ScheduleControl.Business.Abstract;
+using ScheduleControl.Business.Abstract.Auth;
+using ScheduleControl.Business.Abstract.DatabaseOperation;
 using ScheduleControl.Business.Abstract.Mail;
 using ScheduleControl.Business.Concrete.Managers;
+using ScheduleControl.Business.Concrete.Managers.Auth;
+using ScheduleControl.Business.Concrete.Managers.DatabaseOperation;
 using ScheduleControl.Business.Concrete.Managers.Mail;
 using ScheduleControl.DataAccess.Abstract;
 using ScheduleControl.DataAccess.Concrete.EntityFramework;
@@ -63,7 +67,13 @@ namespace ScheduleControl.WebUI
             // dependency
             services.AddScoped<ICurrencyService, CurrencyManager>();
             services.AddScoped<ICurrencyDal, EfCurrencyDal>();
+
+            services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IUserDal, EfUserDal>();
+
+            services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<IMailService, MailManager>();
+            services.AddScoped<IDatabaseOptionService, DatabaseOptionManager>();
 
             // configuration options
             services.Configure<SmtpConfigDto>(Configuration.GetSection("SmtpConfig"));
@@ -123,7 +133,7 @@ namespace ScheduleControl.WebUI
             GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute { Attempts = 0 });
 
             // ilk basta tanımlayabiliriz.
-            BackgroundJob.Schedules.RecurringJobs.CheckCurrencyDataRefresh();
+            //BackgroundJob.Schedules.RecurringJobs.CheckCurrencyDataRefresh();
 
         }
     }

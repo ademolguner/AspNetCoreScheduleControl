@@ -7,6 +7,7 @@ namespace ScheduleControl.Business.Abstract.Mail
     public interface IMailService
     {
         Task SendMailAsync(MailMessageDto mailMessageDto);
+        Task SendUserRegisterMailAsync();//MailMessageDto mailMessageDto
     }
 
 }

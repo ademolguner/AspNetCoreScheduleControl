@@ -23,7 +23,8 @@ namespace ScheduleControl.WebUI.Controllers
         public IActionResult Index()
         {
             // bir takım işlemler ve sponrasında mail tetikleniyor
-            FireAndForgetJobs.SendMailJobs();
+            //FireAndForgetJobs.CheckCurrencyDataRefresh();
+            //DelayedJobs.SendMailJobs();
             return View();
         }
 

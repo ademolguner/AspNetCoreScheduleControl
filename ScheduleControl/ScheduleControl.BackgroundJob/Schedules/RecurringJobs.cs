@@ -13,15 +13,15 @@ namespace ScheduleControl.BackgroundJob.Schedules
     public static class RecurringJobs
     {
        
+       
         [Obsolete]
-        public static void CheckCurrencyDataRefresh()
+        public static void DatabaseBackupOperation()
         {
-            RecurringJob.RemoveIfExists(nameof(CurrencyScheduleJobManager));
-            RecurringJob.AddOrUpdate<CurrencyScheduleJobManager>(nameof(CurrencyScheduleJobManager),
-                job => job.Run(JobCancellationToken.Null),
-                // Cron.Daily(6), TimeZoneInfo.Local);
-                Cron.MinuteInterval(2), TimeZoneInfo.Local);
+            Hangfire.BackgroundJob.Schedule<DataBaseBackupScheduleJobManager>
+                 (
+                  job => job.Run(JobCancellationToken.Null),
+                  TimeSpan.FromSeconds(10)
+                  );
         }
-
     }
 }

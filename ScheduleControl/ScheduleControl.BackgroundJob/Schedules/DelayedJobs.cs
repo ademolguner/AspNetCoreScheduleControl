@@ -14,15 +14,31 @@ namespace ScheduleControl.BackgroundJob.Schedules
     public static class DelayedJobs
     {
 
-         
         [Obsolete]
-        public static void CreatedDailyReport()
+        public static void SendMailJobs()
         {
-             Hangfire.BackgroundJob.Schedule<DataBaseBackupScheduleJobManager>
-                  (
-                   job => job.Run(JobCancellationToken.Null), 
-                   TimeSpan.FromSeconds(10)
-                   );
+            //Hangfire.BackgroundJob.Enqueue<EmailSendingScheduleJobManager>
+            //(
+            //    job => job.Run(JobCancellationToken.Null)
+            //);
+            Hangfire.BackgroundJob.Schedule<EmailSendingScheduleJobManager>
+                (
+                 job => job.Run(JobCancellationToken.Null),
+                 TimeSpan.FromSeconds(10)
+                 );
+        }
+        [Obsolete]
+        public static void SendMailRegisterJobs()
+        {
+            //Hangfire.BackgroundJob.Enqueue<UserRegisterScheduleJobManager>
+            //(
+            //    job => job.Run(JobCancellationToken.Null)
+            //);
+            Hangfire.BackgroundJob.Schedule<UserRegisterScheduleJobManager>
+                 (
+                  job => job.Run(JobCancellationToken.Null),
+                  TimeSpan.FromSeconds(10)
+                  );
         }
     }
 }

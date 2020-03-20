@@ -6,9 +6,9 @@ using Hangfire;
 
 namespace ScheduleControl.BackgroundJob.Abstract
 {
-   public  interface ISchedulerJob
-   {
-       Task Run(IJobCancellationToken token);
-       Task Process();
-   }
+    public interface ISchedulerJob
+    {
+        Task Run(IJobCancellationToken token);
+        Task Process();
+    }
 }

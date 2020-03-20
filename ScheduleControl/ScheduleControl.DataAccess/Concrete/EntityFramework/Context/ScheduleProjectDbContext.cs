@@ -26,6 +26,7 @@ namespace ScheduleControl.DataAccess.Concrete.EntityFramework.Context
         }
 
         public DbSet<Currency> Currency { get; set; }
-        
+        public DbSet<User> User { get; set; }
+
     }
 }
