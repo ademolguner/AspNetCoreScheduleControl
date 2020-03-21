@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ScheduleControl.Core.Entities;
+﻿using ScheduleControl.Core.Entities;
 
 namespace ScheduleControl.Entities.Dtos.Database
 {
-   public  class DatabaseOptionDto:IDto
+    public class DatabaseOptionDto : IDto
     {
         public string ServerName { get; set; }
         public string DatabaseName { get; set; }

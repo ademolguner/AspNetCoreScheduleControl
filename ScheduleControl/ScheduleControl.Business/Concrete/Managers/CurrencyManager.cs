@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using ScheduleControl.Business.Abstract;
+﻿using ScheduleControl.Business.Abstract;
 using ScheduleControl.DataAccess.Abstract;
 using ScheduleControl.Entities.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
+using System.Xml;
 
 namespace ScheduleControl.Business.Concrete.Managers
 {
     public class CurrencyManager : ICurrencyService
     {
         private readonly ICurrencyDal _currencyDal;
+
         public CurrencyManager(ICurrencyDal currencyDal)
         {
             _currencyDal = currencyDal;
         }
-
 
         public List<Currency> GetCurrencies()
         {
@@ -39,7 +37,6 @@ namespace ScheduleControl.Business.Concrete.Managers
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
@@ -63,20 +60,18 @@ namespace ScheduleControl.Business.Concrete.Managers
 
             foreach (DataRow itemRow in ds.Tables[1].Rows)
             {
-                currencies.Add( new Currency
+                currencies.Add(new Currency
                 {
                     Name = itemRow.ItemArray[1].ToString(),
                     Code = itemRow.ItemArray[2].ToString(),
-                    ForexBuying = string.IsNullOrEmpty(itemRow.ItemArray[3].ToString())!=true? Convert.ToDecimal(itemRow.ItemArray[3]):0,
-                    ForexSelling = string.IsNullOrEmpty(itemRow.ItemArray[4].ToString()) != true ? Convert.ToDecimal(itemRow.ItemArray[4]):0,
-                    BanknoteBuying = string.IsNullOrEmpty(itemRow.ItemArray[5].ToString()) != true ? Convert.ToDecimal(itemRow.ItemArray[5]):0,
-                    BanknoteSelling = string.IsNullOrEmpty(itemRow.ItemArray[6].ToString()) != true ? Convert.ToDecimal(itemRow.ItemArray[6]):0,
+                    ForexBuying = string.IsNullOrEmpty(itemRow.ItemArray[3].ToString()) != true ? Convert.ToDecimal(itemRow.ItemArray[3]) : 0,
+                    ForexSelling = string.IsNullOrEmpty(itemRow.ItemArray[4].ToString()) != true ? Convert.ToDecimal(itemRow.ItemArray[4]) : 0,
+                    BanknoteBuying = string.IsNullOrEmpty(itemRow.ItemArray[5].ToString()) != true ? Convert.ToDecimal(itemRow.ItemArray[5]) : 0,
+                    BanknoteSelling = string.IsNullOrEmpty(itemRow.ItemArray[6].ToString()) != true ? Convert.ToDecimal(itemRow.ItemArray[6]) : 0,
                     LastUpdateTime = DateTime.Now
                 });
             }
-            return await Task.FromResult(currencies); 
+            return await Task.FromResult(currencies);
         }
-
-
     }
 }

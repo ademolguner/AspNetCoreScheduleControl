@@ -1,9 +1,6 @@
 ﻿using Hangfire;
+using ScheduleControl.BackgroundJob.Managers.RecurringJobs;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using ScheduleControl.BackgroundJob.Managers;
-using ScheduleControl.BackgroundJob.Schedules;
 
 namespace ScheduleControl.BackgroundJob.Schedules
 {
@@ -12,16 +9,13 @@ namespace ScheduleControl.BackgroundJob.Schedules
     /// </summary>
     public static class RecurringJobs
     {
-       
-       
         [Obsolete]
         public static void DatabaseBackupOperation()
         {
-            Hangfire.BackgroundJob.Schedule<DataBaseBackupScheduleJobManager>
-                 (
-                  job => job.Run(JobCancellationToken.Null),
-                  TimeSpan.FromSeconds(10)
-                  );
+            RecurringJob.RemoveIfExists(nameof(DataBaseBackupScheduleJobManager));
+            RecurringJob.AddOrUpdate<DataBaseBackupScheduleJobManager>(nameof(DataBaseBackupScheduleJobManager),
+                job => job.Process(),   //job => job.Run(JobCancellationToken.Null),
+                Cron.Daily(1), TimeZoneInfo.Local);
         }
     }
 }

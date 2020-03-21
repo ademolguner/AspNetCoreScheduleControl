@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ScheduleControl.Core.Entities;
+﻿using ScheduleControl.Core.Entities;
+using System;
 
 namespace ScheduleControl.Entities.Models
 {
-  public  class Currency:IEntity
+    public class Currency : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

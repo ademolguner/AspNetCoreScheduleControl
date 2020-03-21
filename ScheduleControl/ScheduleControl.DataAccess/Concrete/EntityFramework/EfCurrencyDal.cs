@@ -1,8 +1,5 @@
-﻿using ScheduleControl.DataAccess.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using ScheduleControl.Core.DataAccess.EntityFramework;
+﻿using ScheduleControl.Core.DataAccess.EntityFramework;
+using ScheduleControl.DataAccess.Abstract;
 using ScheduleControl.DataAccess.Concrete.EntityFramework.Context;
 using ScheduleControl.Entities.Models;
 

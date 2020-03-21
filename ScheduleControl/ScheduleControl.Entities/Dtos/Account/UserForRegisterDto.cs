@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ScheduleControl.Entities.Dtos.Account
+﻿namespace ScheduleControl.Entities.Dtos.Account
 {
-   public class UserForRegisterDto
+    public class UserForRegisterDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

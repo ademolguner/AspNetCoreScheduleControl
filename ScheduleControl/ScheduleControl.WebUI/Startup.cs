@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Hangfire;
+﻿using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ScheduleControl.BackgroundJob;
-using ScheduleControl.BackgroundJob.Abstract;
-using ScheduleControl.BackgroundJob.Managers;
-using ScheduleControl.BackgroundJob.Schedules;
 using ScheduleControl.Business.Abstract;
 using ScheduleControl.Business.Abstract.Auth;
 using ScheduleControl.Business.Abstract.DatabaseOperation;
@@ -28,12 +20,10 @@ using ScheduleControl.DataAccess.Concrete.EntityFramework;
 using ScheduleControl.DataAccess.Concrete.EntityFramework.Context;
 using ScheduleControl.Entities.Dtos.Database;
 using ScheduleControl.Entities.Dtos.Mail;
+using System;
 
 namespace ScheduleControl.WebUI
 {
-
-
-
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -46,7 +36,6 @@ namespace ScheduleControl.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             var connectionString = Configuration["ConnectionStrings:ScheduleProjectDb"];
             services.AddDbContext<ScheduleProjectDbContext>(option => option.UseSqlServer(connectionString));
 
@@ -60,9 +49,6 @@ namespace ScheduleControl.WebUI
                 };
                 config.UseSqlServerStorage(connectionString, option);
             });
-
-
-
 
             // dependency
             services.AddScoped<ICurrencyService, CurrencyManager>();
@@ -79,10 +65,7 @@ namespace ScheduleControl.WebUI
             services.Configure<SmtpConfigDto>(Configuration.GetSection("SmtpConfig"));
             services.Configure<DatabaseOptionDto>(Configuration.GetSection("DatabaseOption"));
 
-
             // Schedule servisi
-
-
 
             services.AddControllersWithViews();
         }
@@ -104,7 +87,6 @@ namespace ScheduleControl.WebUI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-
             //app.UseHangfireDashboard();
             app.UseHangfireDashboard("/hangfire", new DashboardOptions
             {
@@ -115,10 +97,6 @@ namespace ScheduleControl.WebUI
             {
                 WorkerCount = 1
             });
-
-
-
-
 
             app.UseRouting();
             app.UseAuthorization();
@@ -133,8 +111,7 @@ namespace ScheduleControl.WebUI
             GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute { Attempts = 0 });
 
             // ilk basta tanımlayabiliriz.
-            //BackgroundJob.Schedules.RecurringJobs.CheckCurrencyDataRefresh();
-
+            BackgroundJob.Schedules.RecurringJobs.DatabaseBackupOperation();
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using ScheduleControl.Business.Abstract;
 using ScheduleControl.Business.Abstract.Mail;
 using ScheduleControl.Entities.Dtos.Mail;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace ScheduleControl.Business.Concrete.Managers.Mail
 {
@@ -21,40 +20,35 @@ namespace ScheduleControl.Business.Concrete.Managers.Mail
         }
 
         public async Task SendMailAsync(MailMessageDto mailMessageDto)
-        { 
-                MailMessage mailMessage = mailMessageDto.GetMailMessage();
-                mailMessage.From = new MailAddress(_smtpConfigDto.User);
+        {
+            MailMessage mailMessage = mailMessageDto.GetMailMessage();
+            mailMessage.From = new MailAddress(_smtpConfigDto.User);
 
-                using var client = CreateSmtpClient();
-                await client.SendMailAsync(mailMessage);
+            using var client = CreateSmtpClient();
+            await client.SendMailAsync(mailMessage);
         }
 
-        public async Task SendUserRegisterMailAsync()//MailMessageDto mailMessageDto
+        public async Task SendUserRegisterMailAsync(int userId)//MailMessageDto mailMessageDto
         {
             using var client = CreateSmtpClient();
-            var userList = _userService.GetUnRegisterUsers();
-            foreach (var userItem in userList)
+            var userInfo = _userService.GetByUserId(userId);
+
+            MailMessageDto mailMessageDto = new MailMessageDto
             {
-                MailMessageDto mailMessageDto = new MailMessageDto
-                {
-                    Body = "Kayıt işleminizi tamamlamak için  "+ "<a href='https://localhost:44395/Account/UserRegisterCheck?reqUrl=*" + userItem.UserGuid.ToString() + "'>linke</a> tıklayınız.",
-                    To = userItem.Email,
-                    Subject = "Kullanıcı Register Islemi Kontrol",
-                    From= _smtpConfigDto.User
-                };
-                MailMessage mailMessage = mailMessageDto.GetMailMessage();
-                mailMessage.IsBodyHtml = true;
-                //mailMessage.From = new MailAddress(_smtpConfigDto.User);
-                // burada register mailleri kişi kişi gönderilecek
-                // HttpContext.Current.Request.RawUrl
-                await client.SendMailAsync(mailMessage);
-            } 
+                Body = "Kayıt işleminizi tamamlamak için  " + "<a href='https://localhost:44395/Account/UserRegisterCheck?reqUrl=*" + userInfo.UserGuid.ToString() + "'>linke</a> tıklayınız.",
+                To = userInfo.Email,
+                Subject = "Kullanıcı Register Islemi Kontrol",
+                From = _smtpConfigDto.User
+            };
+            MailMessage mailMessage = mailMessageDto.GetMailMessage();
+            mailMessage.IsBodyHtml = true;
+            await client.SendMailAsync(mailMessage);
         }
 
         private SmtpClient CreateSmtpClient()
         {
-            SmtpClient smtp= new SmtpClient(_smtpConfigDto.Host, _smtpConfigDto.Port);
-            smtp.Credentials=new NetworkCredential(_smtpConfigDto.User, _smtpConfigDto.Password);
+            SmtpClient smtp = new SmtpClient(_smtpConfigDto.Host, _smtpConfigDto.Port);
+            smtp.Credentials = new NetworkCredential(_smtpConfigDto.User, _smtpConfigDto.Password);
             smtp.EnableSsl = _smtpConfigDto.UseSsl;
             return smtp;
         }

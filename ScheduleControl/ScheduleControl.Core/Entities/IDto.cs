@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ScheduleControl.Core.Entities
+﻿namespace ScheduleControl.Core.Entities
 {
-   public interface IDto
+    public interface IDto
     {
     }
 }

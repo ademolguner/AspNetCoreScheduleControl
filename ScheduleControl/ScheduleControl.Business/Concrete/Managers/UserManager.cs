@@ -3,7 +3,6 @@ using ScheduleControl.DataAccess.Abstract;
 using ScheduleControl.Entities.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ScheduleControl.Business.Concrete.Managers
 {
@@ -16,7 +15,6 @@ namespace ScheduleControl.Business.Concrete.Managers
             _userDal = userDal;
         }
 
-
         public void Add(User user)
         {
             _userDal.Add(user);
@@ -26,7 +24,6 @@ namespace ScheduleControl.Business.Concrete.Managers
         {
             return _userDal.Get(u => u.Email == email);
         }
-
 
         public User UserGetByUniqNumber(Guid userUniqNumber)
         {
@@ -41,6 +38,11 @@ namespace ScheduleControl.Business.Concrete.Managers
         public void Update(User user)
         {
             _userDal.Update(user);
+        }
+
+        public User GetByUserId(int userId)
+        {
+            return _userDal.Get(u => u.UserId == userId);
         }
     }
 }

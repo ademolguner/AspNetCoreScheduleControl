@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ScheduleControl.BackgroundJob.Schedules;
-using ScheduleControl.WebUI.Models; 
+using ScheduleControl.WebUI.Models;
+using System;
+using System.Diagnostics;
 
 namespace ScheduleControl.WebUI.Controllers
 {

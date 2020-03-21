@@ -1,5 +1,3 @@
-using System;
-
 namespace ScheduleControl.WebUI.Models
 {
     public class ErrorViewModel

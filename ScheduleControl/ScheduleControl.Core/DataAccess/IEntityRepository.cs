@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ScheduleControl.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
-using ScheduleControl.Core.Entities;
 
 namespace ScheduleControl.Core.DataAccess
 {

@@ -1,26 +1,36 @@
-﻿using System;
+﻿using ScheduleControl.BackgroundJob.Managers;
+using System;
 
 namespace ScheduleControl.BackgroundJob.Schedules
 {
     public static class ContinuationJobs
     {
         /// <summary>
-        /// Bir kere ve hemen çalışan job türüdür.
+        /// Birbiri ile ilişkili işlerin olduğu zaman çalışan job. Job tetiklenmesi için başka bir job bitmesi gerekiyor
+        /// BackgroundJob.ContinueWith(jobId,() => Console.WriteLine("Continuation!"));
         /// </summary>
         /// <param name="id"></param>
         [Obsolete]
-        public static void ExampleOneSynchronization(string id)
+        public static void GetMyFinancialCashUpdate(string id)
         {
-            Hangfire.BackgroundJob.ContinueJobWith(
-                           parentId: id, 
-                           () => Console.WriteLine("Continuation!"));
+            Hangfire.BackgroundJob.ContinueJobWith<FinancialCashScheduleJobManager>(
+                           parentId: id,
+                           job => job.Process());
         }
 
-        public static void ExampleTwoSynchronization(string id)
-        {
-            Hangfire.BackgroundJob.ContinueJobWith(
-                parentId: id,
-                () => Console.WriteLine("Continuation!"));
-        }
+        //Hangfire.BackgroundJob.Schedule<DataBaseBackupScheduleJobManager>
+        //         (
+        //          job => job.Run(JobCancellationToken.Null),
+        //          TimeSpan.FromDays(1)
+        //          );
+
+        //CurrencyScheduleJobManager
+
+        //Cron.MinuteInterval(2), TimeZoneInfo.Local);
+
+        //[Obsolete]
+        //public static void CheckCurrencyDataRefresh()
+        //{
+        //}
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ScheduleControl.BackgroundJob.Schedules;
 using ScheduleControl.Business.Abstract.Auth;
-using ScheduleControl.Entities.Dtos.Account;
 using ScheduleControl.WebUI.ViewModels;
 
 namespace ScheduleControl.WebUI.Controllers
@@ -13,6 +8,7 @@ namespace ScheduleControl.WebUI.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthService _authService;
+
         public AccountController(IAuthService authService)
         {
             _authService = authService;
@@ -35,13 +31,12 @@ namespace ScheduleControl.WebUI.Controllers
         {
             // kullanıcı kaydet ve hangfire tetikle
             var user = _authService.Register(authViewModel.UserForRegisterDto);
-            DelayedJobs.SendMailRegisterJobs();
-
+#pragma warning disable CS0612 // Type or member is obsolete
+            DelayedJobs.SendMailRegisterJobs(user.UserId);
+#pragma warning restore CS0612 // Type or member is obsolete
 
             return RedirectToAction("Index", "Home");
         }
-
-
 
         [HttpGet("Login")]
         public PartialViewResult Login()
@@ -57,16 +52,13 @@ namespace ScheduleControl.WebUI.Controllers
             return new JsonResult(ModelState);
         }
 
-
         //[HttpGet("UserRegisterCheck")]
         public IActionResult UserRegisterCheck(string reqUrl)
         {
             if (string.IsNullOrEmpty(reqUrl))
-                return RedirectToAction("Error","Home");
+                return RedirectToAction("Error", "Home");
             _authService.UserActivatedRegister(reqUrl);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
-
-
     }
 }

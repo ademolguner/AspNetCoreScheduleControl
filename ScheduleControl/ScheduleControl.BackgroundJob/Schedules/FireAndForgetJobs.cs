@@ -1,29 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Text;
-using System.Threading;
-using Hangfire;
-using Newtonsoft.Json;
-using ScheduleControl.BackgroundJob.Managers;
-using ScheduleControl.BackgroundJob.Schedules;
+﻿using ScheduleControl.BackgroundJob.Managers.FireAndForgetJobs;
+using ScheduleControl.Entities.Dtos.Mail;
+using System;
 
 namespace ScheduleControl.BackgroundJob.Schedules
 {
     /// <summary>
-    /// Bir keree ve hemen çalışan background job tipidir.
+    /// Bir kere ve hemen çalışan background job tipidir.
+    /// //var jobId = BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget!"));
     /// </summary>
     public static class FireAndForgetJobs
     {
         [Obsolete]
-        public static void CheckCurrencyDataRefresh()
+        public static void SendMailJob(MailMessageDto mailMessageDto)
         {
-            RecurringJob.RemoveIfExists(nameof(CurrencyScheduleJobManager));
-            RecurringJob.AddOrUpdate<CurrencyScheduleJobManager>(nameof(CurrencyScheduleJobManager),
-                job => job.Run(JobCancellationToken.Null),
-                Cron.Daily(6), TimeZoneInfo.Local);
-            //Cron.MinuteInterval(2), TimeZoneInfo.Local);
+            Hangfire.BackgroundJob.Enqueue<EmailSendingScheduleJobManager>
+                (
+                 job => job.Process(mailMessageDto)
+                 );
         }
-        
+
+        [Obsolete]
+        public static void GetCurrencyJob()
+        {
+            var jobId = Hangfire.BackgroundJob.Enqueue<CurrencyScheduleJobManager>
+                 (
+                  job => job.Process()
+                  );
+
+            ContinuationJobs.GetMyFinancialCashUpdate(jobId);
+        }
     }
 }

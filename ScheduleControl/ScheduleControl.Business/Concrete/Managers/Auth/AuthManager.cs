@@ -3,14 +3,13 @@ using ScheduleControl.Business.Abstract.Auth;
 using ScheduleControl.Entities.Dtos.Account;
 using ScheduleControl.Entities.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ScheduleControl.Business.Concrete.Managers.Auth
 {
     public class AuthManager : IAuthService
     {
         private IUserService _userService;
+
         public AuthManager(IUserService userService)
         {
             _userService = userService;
@@ -46,14 +45,15 @@ namespace ScheduleControl.Business.Concrete.Managers.Auth
         {
             Guid userUniqNumber = Guid.Parse(userMailUrl.Split("*")[1]);
             var userInfo = _userService.UserGetByUniqNumber(userUniqNumber);
-            if (userInfo != null )
+            if (userInfo != null)
             {
                 userInfo.IsActivatedMailSend = true;
                 userInfo.Status = true;
                 _userService.Update(userInfo);
                 return true;
             }
-            else {
+            else
+            {
                 return false;
             }
         }

@@ -1,27 +1,22 @@
-﻿using System;
+﻿using ScheduleControl.Business.Abstract;
 using System.Threading.Tasks;
-using Hangfire;
-using Microsoft.Extensions.Logging;
-using ScheduleControl.BackgroundJob.Abstract;
-using ScheduleControl.Business.Abstract;
 
-namespace ScheduleControl.BackgroundJob.Managers
+namespace ScheduleControl.BackgroundJob.Managers.FireAndForgetJobs
 {
-    public  class CurrencyScheduleJobManager : ISchedulerJob
+    public class CurrencyScheduleJobManager
     {
-        
         private readonly ICurrencyService _currencyService;
 
         public CurrencyScheduleJobManager(ICurrencyService currencyService)
-        { 
+        {
             _currencyService = currencyService;
         }
 
-        public async Task Run(IJobCancellationToken token)
-        {
-            token.ThrowIfCancellationRequested();
-            await Process();
-        }
+        //public async Task Run(IJobCancellationToken token)
+        //{
+        //    token.ThrowIfCancellationRequested();
+        //    await Process();
+        //}
 
         public async Task Process()
         {
@@ -37,11 +32,8 @@ namespace ScheduleControl.BackgroundJob.Managers
                 else
                 {
                     _currencyService.Add(itemCurrency);
-
                 }
             }
         }
-
-         
     }
 }

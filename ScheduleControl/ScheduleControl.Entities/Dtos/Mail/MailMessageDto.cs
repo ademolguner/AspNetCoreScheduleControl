@@ -1,9 +1,9 @@
-﻿using System.Net.Mail;
-using ScheduleControl.Core.Entities;
+﻿using ScheduleControl.Core.Entities;
+using System.Net.Mail;
 
 namespace ScheduleControl.Entities.Dtos.Mail
 {
-   public  class MailMessageDto:IDto
+    public class MailMessageDto : IDto
     {
         public string To { get; set; }
         public string From { get; set; }
