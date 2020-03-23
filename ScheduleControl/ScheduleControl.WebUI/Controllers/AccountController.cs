@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ScheduleControl.BackgroundJob.Schedules;
 using ScheduleControl.Business.Abstract.Auth;
+using ScheduleControl.Entities.Dtos.Account;
 using ScheduleControl.WebUI.ViewModels;
 
 namespace ScheduleControl.WebUI.Controllers
@@ -22,7 +23,7 @@ namespace ScheduleControl.WebUI.Controllers
         [HttpGet("Register")]
         public IActionResult Register()
         {
-            return View();
+            return PartialView("_Register",new AuthViewModel());
         }
 
         [HttpPost("Register")]
@@ -41,15 +42,15 @@ namespace ScheduleControl.WebUI.Controllers
         [HttpGet("Login")]
         public PartialViewResult Login()
         {
-            return PartialView("Login");
+            //return PartialView("Login");
+            return PartialView("Login", new AuthViewModel());
         }
 
         [HttpPost("Login")]
-        public JsonResult Login(AuthViewModel authViewModel)
+        public IActionResult Login(AuthViewModel authViewModel)
         {
-            ModelState.AddModelError("error", "Hata");
-            ViewBag.error = TempData["error"];
-            return new JsonResult(ModelState);
+            var user = _authService.Login(authViewModel.UserForLoginDto);
+            return RedirectToAction("Index", "Home");
         }
 
         //[HttpGet("UserRegisterCheck")]

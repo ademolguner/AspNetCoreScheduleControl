@@ -36,7 +36,8 @@ namespace ScheduleControl.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration["ConnectionStrings:ScheduleProjectDb"];
+            var connectionString = Configuration["ConnectionStrings:ProjectDev"];
+            var hangfireConnectionString = Configuration["ConnectionStrings:HangfireDev"];
             services.AddDbContext<ScheduleProjectDbContext>(option => option.UseSqlServer(connectionString));
 
             //services.AddHangfire(_ => _.UseSqlServerStorage(Configuration["ConnectionStrings:ScheduleProjectDb"]));
@@ -44,10 +45,19 @@ namespace ScheduleControl.WebUI
             {
                 var option = new SqlServerStorageOptions
                 {
-                    PrepareSchemaIfNecessary = false,
+                    PrepareSchemaIfNecessary = true,
                     QueuePollInterval = TimeSpan.FromMinutes(5)
                 };
-                config.UseSqlServerStorage(connectionString, option);
+                config.UseSqlServerStorage(hangfireConnectionString, option);
+                //.UseSqlServerStorage("db_connection", new SqlServerStorageOptions
+                // {
+                //     CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                //     SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                //     QueuePollInterval = TimeSpan.Zero,
+                //     UseRecommendedIsolationLevel = true,
+                //     UsePageLocksOnDequeue = true,
+                //     DisableGlobalLocks = true
+                // });
             });
 
             // dependency
@@ -56,6 +66,16 @@ namespace ScheduleControl.WebUI
 
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IUserDal, EfUserDal>();
+
+            services.AddScoped<ICashboxService, CashboxManager>();
+            services.AddScoped<ICashboxDal, EfCashboxDal>();
+
+            services.AddScoped<ICashTypeService, CashTypeManager>();
+            services.AddScoped<ICashTypeDal, EfCashTypeDal>();
+
+
+            services.AddScoped<IFinancialCashService, FinancialCashManager>();
+            services.AddScoped<IFinancialCashDal, EfFinancialCashDal>();
 
             services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<IMailService, MailManager>();

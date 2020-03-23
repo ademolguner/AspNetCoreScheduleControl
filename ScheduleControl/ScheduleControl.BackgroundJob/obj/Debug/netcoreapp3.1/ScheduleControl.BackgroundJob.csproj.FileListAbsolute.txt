@@ -15,3 +15,4 @@ D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\Schedu
 D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\obj\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.csproj.CopyComplete
 D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\obj\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.dll
 D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\obj\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.pdb
+D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.BackgroundJob\obj\Debug\netcoreapp3.1\ScheduleControl.BackgroundJob.csproj.CoreCompileInputs.cache

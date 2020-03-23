@@ -6,7 +6,7 @@ using ScheduleControl.Entities.Models;
 namespace ScheduleControl.DataAccess.Concrete.EntityFramework
 {
     //class EfCaseTypeDal
-    public class EfCaseTypeDal : EfEntityRepositoryBase<CashType, ScheduleProjectDbContext>, ICashTypeDal
+    public class EfCashTypeDal : EfEntityRepositoryBase<CashType, ScheduleProjectDbContext>, ICashTypeDal
     {
     }
 }

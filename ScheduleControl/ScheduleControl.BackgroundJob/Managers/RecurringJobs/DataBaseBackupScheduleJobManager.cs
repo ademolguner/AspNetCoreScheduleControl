@@ -12,13 +12,7 @@ namespace ScheduleControl.BackgroundJob.Managers.RecurringJobs
         {
             _databaseOptionService = databaseOptionService;
         }
-
-        public async Task Run(IJobCancellationToken token)
-        {
-            token.ThrowIfCancellationRequested();
-            await Process();
-        }
-
+  
         public async Task Process()
         {
             await _databaseOptionService.RestoreDatabase();

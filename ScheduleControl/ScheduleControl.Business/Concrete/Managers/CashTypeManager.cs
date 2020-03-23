@@ -1,6 +1,7 @@
 ﻿using ScheduleControl.Business.Abstract;
 using ScheduleControl.DataAccess.Abstract;
 using ScheduleControl.Entities.Models;
+using System.Collections.Generic;
 
 namespace ScheduleControl.Business.Concrete.Managers
 {
@@ -11,6 +12,11 @@ namespace ScheduleControl.Business.Concrete.Managers
         public CashTypeManager(ICashTypeDal cashTypeDal)
         {
             _cashTypeDal = cashTypeDal;
+        }
+
+        public List<CashType> GetAll()
+        {
+            return _cashTypeDal.GetList();
         }
 
         public CashType GetById(int id)

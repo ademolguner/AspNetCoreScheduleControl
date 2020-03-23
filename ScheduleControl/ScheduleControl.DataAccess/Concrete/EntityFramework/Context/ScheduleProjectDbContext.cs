@@ -20,7 +20,7 @@ namespace ScheduleControl.DataAccess.Concrete.EntityFramework.Context
 
         public DbSet<Currency> Currency { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<CashType> CaseType { get; set; }
+        public DbSet<CashType> CashType { get; set; }
         public DbSet<Cashbox> Cashbox { get; set; }
         public DbSet<FinancialCash> FinancialCash { get; set; }
     }

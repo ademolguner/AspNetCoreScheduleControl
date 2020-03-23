@@ -6,6 +6,9 @@ namespace ScheduleControl.BackgroundJob.Managers
 {
     public class FinancialCashScheduleJobManager
     {
+
+
+
         public Task Run(IJobCancellationToken token)
         {
             throw new NotImplementedException();

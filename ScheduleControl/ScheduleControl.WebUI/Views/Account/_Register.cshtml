@@ -1,4 +1,4 @@
-﻿@*@model ScheduleControl.Entities.Dtos.Account.UserForLoginDto*@
+﻿@*@model ScheduleControl.Entities.Dtos.Account.UserForRegisterDto*@
 @model ScheduleControl.WebUI.ViewModels.AuthViewModel
 
 <!doctype html>
@@ -44,14 +44,14 @@
     <link href="signin.css" rel="stylesheet">
 </head>
 <body class="text-center">
-    @Html.ValidationSummary("error")
-    @Html.ValidationMessage("error")
+    @*@Html.ValidationSummary("error")
+    @Html.ValidationMessage("error")*@
 
     @*<form class="form-signin" id="signinForm">*@
-    @*@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "signinForm" }))
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "signinForm" }))
         {
             @Html.AntiForgeryToken()
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Login Form</h1>
             <div class="form-group">
                 <label for="inputEmail" class="sr-only">Email address</label>
                 <input asp-for="@Model.UserForLoginDto.Email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
@@ -66,26 +66,28 @@
             <div class="form-group">
                 <p class="message"> <a href="javascript:ToggleForm('register')">Register</a></p>
             </div>
-        }*@
+        }
     @*</form>*@
 
     @*<form class="register-form " style="display:none;" id="registerForm">  , @style = "display:none;" *@
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "registerForm" }))
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "registerForm", @style = "display:none;" }))
     {
         @Html.AntiForgeryToken()
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
         <h1 class="h3 mb-3 font-weight-normal">User  Register Form</h1>
-
+         
         <div class="form-group">
-            <input asp-for="@Model.UserForRegisterDto.FirstName" type="text" placeholder="First Name" class="form-control" id="firstname" />
+            <input   type="text" placeholder="First Name" class="form-control" id="firstname"  asp-for="@Model.UserForRegisterDto.FirstName" />
+            <span asp-validation-for="@Model.UserForRegisterDto.FirstName" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input asp-for="@Model.UserForRegisterDto.LastName" type="text" placeholder="Last Name" class="form-control" id="lastname" />
+            <input   type="text" placeholder="Last Name" class="form-control" id="lastname"  asp-for="@Model.UserForRegisterDto.LastName"/>
         </div>
         <div class="form-group">
-            <input asp-for="@Model.UserForRegisterDto.Password" type="password" placeholder="Password" class="form-control" id="password" />
+            <input  type="password" placeholder="Password" class="form-control" id="password" asp-for="@Model.UserForRegisterDto.Password"/>
         </div>
         <div class="form-group">
-            <input asp-for="@Model.UserForRegisterDto.Email" type="text" placeholder="Email Address" class="form-control" id="email" />
+            <input   type="text" placeholder="Email Address" class="form-control" id="email" asp-for="@Model.UserForRegisterDto.Email"/>
         </div>
         <div class="form-group">
             <button class="btn btn-lg btn-danger btn-block" type="submit" id="btnregister">Register</button>
@@ -101,13 +103,13 @@
 <script type="text/javascript">
 
     function ToggleForm(formName) {
-        //if (formName == 'signin') {
-        //    $('#signinForm').slideDown();
-        //    $('#registerForm').slideUp();
-        //} else {
-        //    $('#signinForm').slideUp();
-        //    $('#registerForm').slideDown();
-        //}
+        if (formName == 'signin') {
+            $('#signinForm').slideDown();
+            $('#registerForm').slideUp();
+        } else {
+            $('#signinForm').slideUp();
+            $('#registerForm').slideDown();
+        }
 
     }
 

@@ -14,8 +14,8 @@ namespace ScheduleControl.BackgroundJob.Schedules
         {
             RecurringJob.RemoveIfExists(nameof(DataBaseBackupScheduleJobManager));
             RecurringJob.AddOrUpdate<DataBaseBackupScheduleJobManager>(nameof(DataBaseBackupScheduleJobManager),
-                job => job.Process(),   //job => job.Run(JobCancellationToken.Null),
-                Cron.Daily(1), TimeZoneInfo.Local);
+                job => job.Process(),
+                 "59 23 * * *", TimeZoneInfo.Local);
         }
     }
 }

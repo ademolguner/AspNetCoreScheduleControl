@@ -25,7 +25,11 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="javascript:();" data-toggle="modal" data-target="#loginModal">Login</a>
+                            <a class="nav-link text-dark" href="javascript:();" onclick="Registered();">Register</a>
+                            @*data-toggle="modal" data-target="#loginModal"*@
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Cashbox" asp-action="CashInsert">Cash Operation</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/hangfire">Hangfire</a>
@@ -47,7 +51,7 @@
         </div>
     </footer>
 
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -56,8 +60,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    @await Html.PartialAsync("~/Views/Account/Login.cshtml")
+                <div class="modal-body" id="ModalPopupAuth">
+                    
                 </div>
                 <div class="modal-footer">
                     @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -71,5 +75,18 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
+<script type="text/javascript">
+
+
+    function Registered() {
+       // debugger;
+        var url = '@Url.Action("Register", "Account")';
+        //url += '/?Id=' + ortakId;
+        $('#loginModal').modal('show').find('#ModalPopupAuth').load(url);
+
+    }
+     
+</script>
 </body>
 </html>
