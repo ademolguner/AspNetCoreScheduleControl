@@ -5,5 +5,4 @@ D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\Schedu
 D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Core\obj\Debug\netcoreapp3.1\ScheduleControl.Core.AssemblyInfo.cs
 D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Core\obj\Debug\netcoreapp3.1\ScheduleControl.Core.dll
 D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Core\obj\Debug\netcoreapp3.1\ScheduleControl.Core.pdb
-D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Core\obj\Debug\netcoreapp3.1\ScheduleControl.Core.csprojAssemblyReference.cache
 D:\PROJELERIM\SOURCECONTROL\GIT\AspNetCoreScheduleControl\ScheduleControl\ScheduleControl.Core\obj\Debug\netcoreapp3.1\ScheduleControl.Core.csproj.CoreCompileInputs.cache

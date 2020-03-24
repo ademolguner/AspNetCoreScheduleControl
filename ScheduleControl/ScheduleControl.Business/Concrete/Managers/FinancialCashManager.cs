@@ -13,9 +13,19 @@ namespace ScheduleControl.Business.Concrete.Managers
             _financialCashDal = financialCashDal;
         }
 
+        public FinancialCash GetByCurrencyId(int currencyId)
+        {
+            return _financialCashDal.Get(c => c.CurrencyId == currencyId);
+        }
+
         public void Insert(FinancialCash financialCash)
         {
             _financialCashDal.Add(financialCash);
+        }
+
+        public void Update(FinancialCash financialCash)
+        {
+            _financialCashDal.Update(financialCash);
         }
     }
 }

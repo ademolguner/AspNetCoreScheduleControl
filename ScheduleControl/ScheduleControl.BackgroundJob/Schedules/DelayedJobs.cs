@@ -15,7 +15,7 @@ namespace ScheduleControl.BackgroundJob.Schedules
             Hangfire.BackgroundJob.Schedule<UserRegisterScheduleJobManager>
                  (
                   job => job.Process(userId),
-                  TimeSpan.FromMinutes(1)
+                  TimeSpan.FromSeconds(10)
                   );
         }
     }

@@ -16,6 +16,8 @@ namespace ScheduleControl.Business.Abstract
 
         void Update(Currency currency);
 
+       decimal MoneyCompareCurrency(decimal modey, int currencyId);
+
         Task<List<Currency>> GetCurrencyApiCall();
     }
 }

@@ -25,7 +25,7 @@ namespace ScheduleControl.Business.Concrete.Managers
 
         public Currency GetCurrency(int id)
         {
-            return _currencyDal.Get(x => x.Id == id);
+            return _currencyDal.Get(x => x.CurrencyId == id);
         }
 
         public Currency GetCurrencyCode(string code)
@@ -72,6 +72,12 @@ namespace ScheduleControl.Business.Concrete.Managers
                 });
             }
             return await Task.FromResult(currencies);
+        }
+
+        public decimal MoneyCompareCurrency(decimal modey, int currencyId)
+        {
+            var selectedCurrency = GetCurrency(currencyId);
+            return selectedCurrency.BanknoteSelling!=0?modey / selectedCurrency.BanknoteSelling:0;
         }
     }
 }

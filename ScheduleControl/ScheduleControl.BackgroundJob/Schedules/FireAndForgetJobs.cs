@@ -26,7 +26,6 @@ namespace ScheduleControl.BackgroundJob.Schedules
                  (
                   job => job.Process()
                   );
-
             ContinuationJobs.GetMyFinancialCashUpdate(jobId);
         }
     }

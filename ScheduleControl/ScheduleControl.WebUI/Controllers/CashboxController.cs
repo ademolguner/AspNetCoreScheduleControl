@@ -29,13 +29,7 @@ namespace ScheduleControl.WebUI.Controllers
         [HttpGet]
         public IActionResult CashInsert()
         {
-            var typesData = _cashTypeService.GetAll();
-            List<SelectListItem> data = new List<SelectListItem>();
-            foreach (var item in typesData)
-            {
-                data.Add(new SelectListItem { Text = item.CashTypeName, Value = item.CashTypeId.ToString(), Selected = false });
-            }
-            var model = new CashboxInputViewModel { CashTypeItemList = data, TotalQuantity = 0 };
+            var model = GetViewModelData();
             return View(model);
         }
 
@@ -43,9 +37,20 @@ namespace ScheduleControl.WebUI.Controllers
         [Obsolete]
         public IActionResult CashInsert(CashboxInputDto cashboxInputDto)
         {
-            _cashboxService.Insert(new Cashbox { CaseTypeId = cashboxInputDto.SelectedCaseTypeId, TotalQuantity = cashboxInputDto.TotalQuantity });
+            _cashboxService.Insert(new Cashbox { CashTypeId = cashboxInputDto.CashTypeItemList[0], TotalQuantity = cashboxInputDto.TotalQuantity });
             FireAndForgetJobs.GetCurrencyJob();
-            return View();
+            return View("CashInsert", GetViewModelData());
+        }
+
+        private CashboxInputViewModel GetViewModelData()
+        {
+            var typesData = _cashTypeService.GetAll();
+            List<SelectListItem> data = new List<SelectListItem>();
+            foreach (var item in typesData)
+            {
+                data.Add(new SelectListItem { Text = item.CashTypeName, Value = item.CashTypeId.ToString(), Selected = false });
+            }
+            return new CashboxInputViewModel { CashTypeItemList = data, TotalQuantity = 0 };
         }
     }
 }

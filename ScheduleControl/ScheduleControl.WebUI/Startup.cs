@@ -40,12 +40,11 @@ namespace ScheduleControl.WebUI
             var hangfireConnectionString = Configuration["ConnectionStrings:HangfireDev"];
             services.AddDbContext<ScheduleProjectDbContext>(option => option.UseSqlServer(connectionString));
 
-            //services.AddHangfire(_ => _.UseSqlServerStorage(Configuration["ConnectionStrings:ScheduleProjectDb"]));
             services.AddHangfire(config =>
             {
                 var option = new SqlServerStorageOptions
                 {
-                    PrepareSchemaIfNecessary = true,
+                    PrepareSchemaIfNecessary = false,
                     QueuePollInterval = TimeSpan.FromMinutes(5)
                 };
                 config.UseSqlServerStorage(hangfireConnectionString, option);

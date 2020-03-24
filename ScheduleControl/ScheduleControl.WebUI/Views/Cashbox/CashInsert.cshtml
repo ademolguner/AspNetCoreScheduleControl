@@ -10,14 +10,14 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CashInsert2">
+        <form asp-action="CashInsert"  method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="@Model.CashTypeItemList" class="control-label"></label>
 
                 @*@Html.DropDownList("Cash Types", Model.CashTypeItemList)*@
-                @Html.DropDownList("CountryList",  Model.CashTypeItemList, "Value", "Text")
-
+                @*@Html.DropDownList("CountryList",  Model.CashTypeItemList, "Seçiniz",  new { @class="form-control" })*@
+                @Html.DropDownListFor(d => d.CashTypeItemList, Model.CashTypeItemList, "Seçiniz", new { @class = "form-control" })
                 @*<input asp-for="@ModelCashTypeItemList" class="form-control" />
         <span asp-validation-for="CaseTypeId" class="text-danger"></span>*@
             </div>

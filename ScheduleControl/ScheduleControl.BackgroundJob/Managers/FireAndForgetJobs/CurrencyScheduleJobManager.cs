@@ -26,7 +26,7 @@ namespace ScheduleControl.BackgroundJob.Managers.FireAndForgetJobs
                 var currencyItemData = _currencyService.GetCurrencyCode(itemCurrency.Code);
                 if (currencyItemData != null)
                 {
-                    itemCurrency.Id = currencyItemData.Id;
+                    itemCurrency.CurrencyId = currencyItemData.CurrencyId;
                     _currencyService.Update(itemCurrency);
                 }
                 else

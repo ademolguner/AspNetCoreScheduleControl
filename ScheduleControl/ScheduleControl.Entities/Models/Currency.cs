@@ -5,7 +5,7 @@ namespace ScheduleControl.Entities.Models
 {
     public class Currency : IEntity
     {
-        public int Id { get; set; }
+        public int CurrencyId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public decimal ForexBuying { get; set; }
