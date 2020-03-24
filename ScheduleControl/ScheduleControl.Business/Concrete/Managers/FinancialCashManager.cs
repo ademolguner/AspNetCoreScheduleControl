@@ -1,6 +1,7 @@
 ﻿using ScheduleControl.Business.Abstract;
 using ScheduleControl.DataAccess.Abstract;
 using ScheduleControl.Entities.Models;
+using System;
 
 namespace ScheduleControl.Business.Concrete.Managers
 {
@@ -15,7 +16,16 @@ namespace ScheduleControl.Business.Concrete.Managers
 
         public FinancialCash GetByCurrencyId(int currencyId)
         {
-            return _financialCashDal.Get(c => c.CurrencyId == currencyId);
+            try
+            {
+                var data = _financialCashDal.Get(c => c.CurrencyId == currencyId);
+                return data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public void Insert(FinancialCash financialCash)

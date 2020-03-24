@@ -44,5 +44,10 @@ namespace ScheduleControl.Business.Concrete.Managers
         {
             return _userDal.Get(u => u.UserId == userId);
         }
+
+        public User Logining(string mail, string password)
+        {
+            return _userDal.Get(u => u.Email == mail && u.Password==password);
+        }
     }
 }

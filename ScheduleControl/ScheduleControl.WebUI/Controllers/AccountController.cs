@@ -3,6 +3,7 @@ using ScheduleControl.BackgroundJob.Schedules;
 using ScheduleControl.Business.Abstract.Auth;
 using ScheduleControl.Entities.Dtos.Account;
 using ScheduleControl.WebUI.ViewModels;
+using System;
 
 namespace ScheduleControl.WebUI.Controllers
 {
@@ -23,19 +24,16 @@ namespace ScheduleControl.WebUI.Controllers
         [HttpGet("Register")]
         public IActionResult Register()
         {
-            return PartialView("_Register",new AuthViewModel());
+            var data = new AuthViewModel() { UserForLoginDto = new UserForLoginDto(), UserForRegisterDto = new UserForRegisterDto() };
+            return PartialView("_Register",data);
         }
 
         [HttpPost("Register")]
-        //[Obsolete]
+        [Obsolete]
         public IActionResult Register(AuthViewModel authViewModel)
         {
-            // kullanıcı kaydet ve hangfire tetikle
             var user = _authService.Register(authViewModel.UserForRegisterDto);
-#pragma warning disable CS0612 // Type or member is obsolete
             DelayedJobs.SendMailRegisterJobs(user.UserId);
-#pragma warning restore CS0612 // Type or member is obsolete
-
             return RedirectToAction("Index", "Home");
         }
 

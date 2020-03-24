@@ -1,5 +1,4 @@
-﻿@*@model ScheduleControl.Entities.Dtos.Account.UserForRegisterDto*@
-@model ScheduleControl.WebUI.ViewModels.AuthViewModel
+﻿@model ScheduleControl.WebUI.ViewModels.AuthViewModel
 
 <!doctype html>
 <html lang="en">
@@ -11,20 +10,10 @@
     <meta name="generator" content="Jekyll v3.8.6">
     <title>Hangfire Login Operation</title>
 
-    @*<link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/sign-in/">*@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Favicons -->
-    @*<link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-        <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-        <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-        <link rel="manifest" href="/docs/4.4/assets/img/favicons/manifest.json">
-        <link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-        <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
-        <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
-        <meta name="theme-color" content="#563d7c">*@
-
+   
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -44,10 +33,7 @@
     <link href="signin.css" rel="stylesheet">
 </head>
 <body class="text-center">
-    @*@Html.ValidationSummary("error")
-    @Html.ValidationMessage("error")*@
-
-    @*<form class="form-signin" id="signinForm">*@
+   
     @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "signinForm" }))
         {
             @Html.AntiForgeryToken()
@@ -67,13 +53,10 @@
                 <p class="message"> <a href="javascript:ToggleForm('register')">Register</a></p>
             </div>
         }
-    @*</form>*@
 
-    @*<form class="register-form " style="display:none;" id="registerForm">  , @style = "display:none;" *@
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "registerForm", @style = "display:none;" }))
     {
         @Html.AntiForgeryToken()
-        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
         <h1 class="h3 mb-3 font-weight-normal">User  Register Form</h1>
          
         <div class="form-group">
@@ -93,10 +76,9 @@
             <button class="btn btn-lg btn-danger btn-block" type="submit" id="btnregister">Register</button>
         </div>
         <div class="form-group">
-            <p class="message">Already registered? <a href="javascript:ToggleForm('signin')">Login</a></p>
+            <p class="message col-form-label">Already registered? <a href="javascript:ToggleForm('signin')">Login</a></p>
         </div>
     }
-    @*</form>*@
 </body>
 </html>
 
@@ -110,51 +92,5 @@
             $('#signinForm').slideUp();
             $('#registerForm').slideDown();
         }
-
     }
-
-    @*$(document).ready(function () {
-        debugger;
-        // click on button submit
-        $("#btnlogin").on('click', function(){
-            // send ajax
-            $.ajax({
-                url: '@Url.Action("Login","Account")', // url where to submit the request
-                type : "POST", // type of action POST || GET
-                dataType : 'json', // data type
-                data : $("#signinForm").serialize(), // post data || get data
-                success: function (result) {
-                    debugger;
-                    // you can see the result from the console
-                    // tab of the developer tools
-                    console.log(result);
-                },
-                error: function (xhr, resp, text) {
-                    debugger;
-                    console.log(xhr, resp, text);
-                }
-            })
-        });
-
-        //register
-        $("#btnregister").on('click', function(){
-            // send ajax
-            $.ajax({
-                url: '@Url.Action("Register","Account")', // url where to submit the request
-                type : "POST", // type of action POST || GET
-                dataType : 'json', // data type
-                data : $("#registerForm").serialize(), // post data || get data
-                success: function (result) {
-                    debugger;
-                    // you can see the result from the console
-                    // tab of the developer tools
-                    console.log(result);
-                },
-                error: function (xhr, resp, text) {
-                    debugger;
-                    console.log(xhr, resp, text);
-                }
-            })
-        });
-    });*@
 </script>

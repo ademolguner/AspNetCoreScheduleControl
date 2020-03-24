@@ -15,7 +15,7 @@ namespace ScheduleControl.BackgroundJob.Managers.RecurringJobs
   
         public async Task Process()
         {
-            await _databaseOptionService.RestoreDatabase();
+            //await _databaseOptionService.RestoreDatabase();
             await _databaseOptionService.BackupDatabase();
         }
     }

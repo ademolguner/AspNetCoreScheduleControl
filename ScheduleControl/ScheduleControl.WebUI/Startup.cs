@@ -44,7 +44,7 @@ namespace ScheduleControl.WebUI
             {
                 var option = new SqlServerStorageOptions
                 {
-                    PrepareSchemaIfNecessary = false,
+                    PrepareSchemaIfNecessary = true,
                     QueuePollInterval = TimeSpan.FromMinutes(5)
                 };
                 config.UseSqlServerStorage(hangfireConnectionString, option);

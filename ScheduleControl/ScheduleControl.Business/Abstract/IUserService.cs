@@ -17,5 +17,7 @@ namespace ScheduleControl.Business.Abstract
         User UserGetByUniqNumber(Guid userUniqNumber);
 
         List<User> GetUnRegisterUsers();
+
+        User Logining(string mail, string password);
     }
 }

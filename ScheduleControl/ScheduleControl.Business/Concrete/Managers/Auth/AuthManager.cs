@@ -17,7 +17,7 @@ namespace ScheduleControl.Business.Concrete.Managers.Auth
 
         public User Login(UserForLoginDto userForLoginDto)
         {
-            var userToCheck = _userService.GetByMail(userForLoginDto.Email);
+            var userToCheck = _userService.Logining(userForLoginDto.Email, userForLoginDto.Password);
             if (userToCheck == null)
             {
                 throw new Exception("hata metni");
@@ -27,6 +27,11 @@ namespace ScheduleControl.Business.Concrete.Managers.Auth
 
         public User Register(UserForRegisterDto userForRegisterDto)
         {
+            var userToCheck = UserExists(userForRegisterDto.Email);
+            if (userToCheck == null)
+            {
+                throw new Exception("Bu mail adresi ile kullanıcı kayıtlı  !!!");
+            }
             var user = new User
             {
                 Email = userForRegisterDto.Email,
