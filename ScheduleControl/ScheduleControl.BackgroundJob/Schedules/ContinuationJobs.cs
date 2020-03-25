@@ -18,19 +18,6 @@ namespace ScheduleControl.BackgroundJob.Schedules
                            job => job.Process());
         }
 
-        //Hangfire.BackgroundJob.Schedule<DataBaseBackupScheduleJobManager>
-        //         (
-        //          job => job.Run(JobCancellationToken.Null),
-        //          TimeSpan.FromDays(1)
-        //          );
-
-        //CurrencyScheduleJobManager
-
-        //Cron.MinuteInterval(2), TimeZoneInfo.Local);
-
-        //[Obsolete]
-        //public static void CheckCurrencyDataRefresh()
-        //{
-        //}
+        // farklı işler yapan metotları burada tanımlayabiliriz. tabi  ContinuationJobs  türünde çalışan
     }
 }

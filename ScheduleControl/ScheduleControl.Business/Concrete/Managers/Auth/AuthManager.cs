@@ -28,22 +28,22 @@ namespace ScheduleControl.Business.Concrete.Managers.Auth
         public User Register(UserForRegisterDto userForRegisterDto)
         {
             var userToCheck = UserExists(userForRegisterDto.Email);
-            if (userToCheck == null)
+            if (userToCheck)
             {
-                throw new Exception("Bu mail adresi ile kullanıcı kayıtlı  !!!");
+                var user = new User
+                {
+                    Email = userForRegisterDto.Email,
+                    FirstName = userForRegisterDto.FirstName,
+                    LastName = userForRegisterDto.LastName,
+                    Password = userForRegisterDto.Password,
+                    Status = false,
+                    UserGuid = Guid.NewGuid(),
+                    IsActivatedMailSend = false
+                };
+                _userService.Add(user);
+                return user;
             }
-            var user = new User
-            {
-                Email = userForRegisterDto.Email,
-                FirstName = userForRegisterDto.FirstName,
-                LastName = userForRegisterDto.LastName,
-                Password = userForRegisterDto.Password,
-                Status = false,
-                UserGuid = Guid.NewGuid(),
-                IsActivatedMailSend = false
-            };
-            _userService.Add(user);
-            return user;
+            throw new Exception("Bu mail adresi ile kullanıcı kayıtlı  !!!");
         }
 
         public bool UserActivatedRegister(string userMailUrl)

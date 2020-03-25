@@ -45,19 +45,20 @@ namespace ScheduleControl.WebUI
                 var option = new SqlServerStorageOptions
                 {
                     PrepareSchemaIfNecessary = true,
-                    QueuePollInterval = TimeSpan.FromMinutes(5)
+                    QueuePollInterval = TimeSpan.FromMinutes(5),
+                    CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                    UseRecommendedIsolationLevel = true,
+                    UsePageLocksOnDequeue = true,
+                    DisableGlobalLocks = true
                 };
-                config.UseSqlServerStorage(hangfireConnectionString, option);
-                //.UseSqlServerStorage("db_connection", new SqlServerStorageOptions
-                // {
-                //     CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-                //     SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-                //     QueuePollInterval = TimeSpan.Zero,
-                //     UseRecommendedIsolationLevel = true,
-                //     UsePageLocksOnDequeue = true,
-                //     DisableGlobalLocks = true
-                // });
+
+                config.UseSqlServerStorage(hangfireConnectionString, option)
+                      .WithJobExpirationTimeout(TimeSpan.FromHours(6));
+
             });
+
+
 
             // dependency
             services.AddScoped<ICurrencyService, CurrencyManager>();
@@ -80,12 +81,11 @@ namespace ScheduleControl.WebUI
             services.AddScoped<IMailService, MailManager>();
             services.AddScoped<IDatabaseOptionService, DatabaseOptionManager>();
 
-            // configuration options
+            // configuration configure options
             services.Configure<SmtpConfigDto>(Configuration.GetSection("SmtpConfig"));
             services.Configure<DatabaseOptionDto>(Configuration.GetSection("DatabaseOption"));
 
-            // Schedule servisi
-
+           
             services.AddControllersWithViews();
         }
 
@@ -100,7 +100,6 @@ namespace ScheduleControl.WebUI
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -109,12 +108,23 @@ namespace ScheduleControl.WebUI
             //app.UseHangfireDashboard();
             app.UseHangfireDashboard("/hangfire", new DashboardOptions
             {
-                Authorization = new[] { new HangfireDashboardAuthorizationFilter() }
+                Authorization = new[] { new HangfireDashboardAuthorizationFilter() },
+                DashboardTitle="Adem Olguner'in Hangfire DashBoard alanı",
+                AppPath = "~"
+                
+
             });
+            
             //app.UseHangfireServer();
             app.UseHangfireServer(new BackgroundJobServerOptions
             {
-                WorkerCount = 1
+                WorkerCount = 1,
+                /* 
+                 Hangfire Server, planlanan işleri sıralarına göre sıralamak için zamanlamayı düzenli olarak denetler ve çalışanların bunları yürütmesine olanak tanır. 
+                Varsayılan olarak, kontrol aralığı 15 saniyeye eşittir, ancak BackgroundJobServer yapıcısına ilettiğiniz seçeneklerde 
+                SchedulePollingInterval özelliğini ayarlayarak değiştirebilirsiniz   */
+                SchedulePollingInterval = TimeSpan.FromSeconds(30) // Varsayılan olarak, kontrol aralığı 15 saniyeye eşittir ancak değiştirebiliriz.
+
             });
 
             app.UseRouting();

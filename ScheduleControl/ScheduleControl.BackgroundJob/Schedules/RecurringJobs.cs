@@ -12,6 +12,9 @@ namespace ScheduleControl.BackgroundJob.Schedules
         [Obsolete]
         public static void DatabaseBackupOperation()
         {
+            /*
+             RemoveIfExists yöntemini çağırarak var olan yinelenen bir işi kaldırabilirsiniz. Böyle tekrar eden bir iş olmadığında bir istisna oluşturmaz
+             */
             RecurringJob.RemoveIfExists(nameof(DataBaseBackupScheduleJobManager));
             RecurringJob.AddOrUpdate<DataBaseBackupScheduleJobManager>(nameof(DataBaseBackupScheduleJobManager),
                 job => job.Process(),
