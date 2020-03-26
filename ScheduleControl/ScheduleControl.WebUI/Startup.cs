@@ -37,9 +37,9 @@ namespace ScheduleControl.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration["ConnectionStrings:ProjectDev"];
-            var hangfireConnectionString = Configuration["ConnectionStrings:HangfireDev"];
             services.AddDbContext<ScheduleProjectDbContext>(option => option.UseSqlServer(connectionString));
 
+            var hangfireConnectionString = Configuration["ConnectionStrings:HangfireDev"];
             services.AddHangfire(config =>
             {
                 var option = new SqlServerStorageOptions
@@ -55,7 +55,6 @@ namespace ScheduleControl.WebUI
 
                 config.UseSqlServerStorage(hangfireConnectionString, option)
                       .WithJobExpirationTimeout(TimeSpan.FromHours(6));
-
             });
 
 
@@ -85,7 +84,7 @@ namespace ScheduleControl.WebUI
             services.Configure<SmtpConfigDto>(Configuration.GetSection("SmtpConfig"));
             services.Configure<DatabaseOptionDto>(Configuration.GetSection("DatabaseOption"));
 
-           
+
             services.AddControllersWithViews();
         }
 
@@ -108,23 +107,21 @@ namespace ScheduleControl.WebUI
             //app.UseHangfireDashboard();
             app.UseHangfireDashboard("/hangfire", new DashboardOptions
             {
-                Authorization = new[] { new HangfireDashboardAuthorizationFilter() },
-                DashboardTitle="Adem Olguner'in Hangfire DashBoard alanı",
-                AppPath = "~"
-                
-
+                DashboardTitle = "Adem Olguner'in Hangfire DashBoard Title adı",
+                Authorization = new[] { new HangfireDashboardAuthorizationFilter() }
             });
-            
+
             //app.UseHangfireServer();
             app.UseHangfireServer(new BackgroundJobServerOptions
             {
-                WorkerCount = 1,
                 /* 
-                 Hangfire Server, planlanan işleri sıralarına göre sıralamak için zamanlamayı düzenli olarak denetler ve çalışanların bunları yürütmesine olanak tanır. 
-                Varsayılan olarak, kontrol aralığı 15 saniyeye eşittir, ancak BackgroundJobServer yapıcısına ilettiğiniz seçeneklerde 
-                SchedulePollingInterval özelliğini ayarlayarak değiştirebilirsiniz   */
-                SchedulePollingInterval = TimeSpan.FromSeconds(30) // Varsayılan olarak, kontrol aralığı 15 saniyeye eşittir ancak değiştirebiliriz.
-
+                    Hangfire Server, planlanan işleri sıralarına göre sıralamak için zamanlamayı düzenli olarak denetler ve 
+                    çalışanların bunları yürütmesine olanak tanır. 
+                    Varsayılan olarak, kontrol aralığı 15 saniyeye eşittir, ancak BackgroundJobServer yapıcısına ilettiğiniz seçeneklerde 
+                    SchedulePollingInterval özelliğini ayarlayarak değiştirebilirsiniz   
+                */
+                SchedulePollingInterval = TimeSpan.FromSeconds(30),
+                WorkerCount = Environment.ProcessorCount * 5
             });
 
             app.UseRouting();
@@ -137,10 +134,13 @@ namespace ScheduleControl.WebUI
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute { Attempts = 0 });
+            GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute { Attempts = 7 });
 
-            // ilk basta tanımlayabiliriz.
+            // Tanımlanan zaman diliminde sürekli çalıştığı için tetiklenmesine gerek yok, 
+            // burada tanımlayabiliriz. tanımlayabiliriz.  
             BackgroundJob.Schedules.RecurringJobs.DatabaseBackupOperation();
+
+
         }
     }
 }

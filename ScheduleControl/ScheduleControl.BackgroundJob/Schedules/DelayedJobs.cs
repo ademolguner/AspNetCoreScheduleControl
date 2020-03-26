@@ -4,8 +4,7 @@ using System;
 namespace ScheduleControl.BackgroundJob.Schedules
 {
     /// <summary>
-    /// Oluşturulduktan belirli bir zaman sonra (ayarlanan) sadece tek seferliğine çalışan job türüdür.
-    /// var jobId = BackgroundJob.Schedule(() => Console.WriteLine("Delayed!"),TimeSpan.FromDays(7));
+    /// Oluşturulduktan belirli bir (ayarlanan) zaman sonra  sadece tek seferliğine çalışan job türüdür.
     /// </summary>
     public static class DelayedJobs
     {
@@ -17,6 +16,6 @@ namespace ScheduleControl.BackgroundJob.Schedules
                   job => job.Process(userId),
                   TimeSpan.FromSeconds(10)
                   );
-        }
+        } 
     }
 }

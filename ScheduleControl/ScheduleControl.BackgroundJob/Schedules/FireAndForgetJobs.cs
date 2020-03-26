@@ -5,8 +5,7 @@ using System;
 namespace ScheduleControl.BackgroundJob.Schedules
 {
     /// <summary>
-    /// Bir kere ve hemen çalışan background job tipidir.
-    /// //var jobId = BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget!"));
+    /// Bir kere ve hemen çalışan background job tipidir. 
     /// </summary>
     public static class FireAndForgetJobs
     {

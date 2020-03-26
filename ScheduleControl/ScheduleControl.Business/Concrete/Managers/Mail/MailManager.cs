@@ -28,14 +28,16 @@ namespace ScheduleControl.Business.Concrete.Managers.Mail
             await client.SendMailAsync(mailMessage);
         }
 
-        public async Task SendUserRegisterMailAsync(int userId)//MailMessageDto mailMessageDto
+        public async Task SendUserRegisterMailAsync(int userId)
         {
             using var client = CreateSmtpClient();
             var userInfo = _userService.GetByUserId(userId);
 
             MailMessageDto mailMessageDto = new MailMessageDto
             {
-                Body = "Kayıt işleminizi tamamlamak için  " + "<a href='https://localhost:44395/Account/UserRegisterCheck?reqUrl=*" + userInfo.UserGuid.ToString() + "'>linke</a> tıklayınız.",
+                Body = "Kayıt işleminizi tamamlamak için  " 
+                     + "<a href='https://aktiflinkadresi/Account/UserRegisterCheck?reqUrl=*" 
+                     + userInfo.UserGuid.ToString() + "'>linke</a> tıklayınız.",
                 To = userInfo.Email,
                 Subject = "Kullanıcı Register Islemi Kontrol",
                 From = _smtpConfigDto.User
