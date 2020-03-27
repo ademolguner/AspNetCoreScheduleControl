@@ -18,7 +18,6 @@ namespace ScheduleControl.BackgroundJob.Schedules
                            parentId: id,
                            job => job.Process());
         } 
-
         // farklı işler yapan metotları burada tanımlayabiliriz. tabi  ContinuationJobs  türünde çalışan
     }
 }

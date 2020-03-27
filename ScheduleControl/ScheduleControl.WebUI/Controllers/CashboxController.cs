@@ -33,11 +33,15 @@ namespace ScheduleControl.WebUI.Controllers
             return View(model);
         }
 
-        [HttpPost]
         [Obsolete]
+        [HttpPost("CashInsert")]
         public IActionResult CashInsert(CashboxInputDto cashboxInputDto)
         {
-            _cashboxService.Insert(new Cashbox { CashTypeId = cashboxInputDto.CashTypeItemList[0], TotalQuantity = cashboxInputDto.TotalQuantity });
+            _cashboxService.Insert(new Cashbox { 
+                                                  CashTypeId = cashboxInputDto.CashTypeItemList[0], 
+                                                  TotalQuantity = cashboxInputDto.TotalQuantity 
+                                                }
+                                   );
             
             FireAndForgetJobs.GetCurrencyJob();
             return View("CashInsert", GetViewModelData());

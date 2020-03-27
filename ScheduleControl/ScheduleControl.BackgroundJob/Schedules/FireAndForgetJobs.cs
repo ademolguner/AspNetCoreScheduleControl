@@ -10,6 +10,18 @@ namespace ScheduleControl.BackgroundJob.Schedules
     public static class FireAndForgetJobs
     {
         [Obsolete]
+        public static void GetCurrencyJob()
+        {
+            var jobId = Hangfire.BackgroundJob.Enqueue<CurrencyScheduleJobManager>(
+                        job => job.Process()
+                        );
+            ContinuationJobs.GetMyFinancialCashUpdate(jobId);
+        }
+
+
+
+
+        [Obsolete]
         public static void SendMailJob(MailMessageDto mailMessageDto)
         {
             Hangfire.BackgroundJob.Enqueue<EmailSendingScheduleJobManager>
@@ -18,14 +30,5 @@ namespace ScheduleControl.BackgroundJob.Schedules
                  );
         }
 
-        [Obsolete]
-        public static void GetCurrencyJob()
-        {
-            var jobId = Hangfire.BackgroundJob.Enqueue<CurrencyScheduleJobManager>
-                 (
-                  job => job.Process()
-                  );
-            ContinuationJobs.GetMyFinancialCashUpdate(jobId);
-        }
     }
 }
