@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ScheduleControl.BackgroundJob.Schedules;
+using ScheduleControl.Entities.Dtos.Mail;
 using ScheduleControl.WebUI.Models;
 using System;
 using System.Diagnostics;
@@ -15,12 +17,16 @@ namespace ScheduleControl.WebUI.Controllers
             _logger = logger;
         }
 
-         
+        [Obsolete]
         public IActionResult Index()
         {
-            // bir takım işlemler ve sponrasında mail tetikleniyor
-            //FireAndForgetJobs.CheckCurrencyDataRefresh();
-            //DelayedJobs.SendMailJobs();
+            //bir takım işlemler ve sponrasında mail tetikleniyor
+            //FireAndForgetJobs.SendMailJob(new MailMessageDto {
+            //    To = "mailadresiniz@gmail.com",
+            //    Subject = "Kullanıcı Register Islemi Kontrol",
+            //    From = "appsettingdosyasındanokunanadres@gmail.com",
+            //    Body="Icerik"
+            //}); 
             return View();
         }
         [HttpGet]
