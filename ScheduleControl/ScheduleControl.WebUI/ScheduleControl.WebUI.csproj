@@ -5,13 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hangfire" Version="1.7.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ScheduleControl.BackgroundJob\ScheduleControl.BackgroundJob.csproj" />
-    <ProjectReference Include="..\ScheduleControl.Business\ScheduleControl.Business.csproj" />
   </ItemGroup>
 
 

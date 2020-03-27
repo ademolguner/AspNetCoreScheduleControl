@@ -4,7 +4,6 @@ using System;
 
 namespace ScheduleControl.BackgroundJob.Schedules
 {
-    
     public static class ContinuationJobs
     {
         /// <summary>
@@ -21,11 +20,7 @@ namespace ScheduleControl.BackgroundJob.Schedules
         } 
 
         // farklı işler yapan metotları burada tanımlayabiliriz. tabi  ContinuationJobs  türünde çalışan
-
-        [Obsolete]
-        public static void BaskaBirIs1(string id)
-        {
-             
-        } 
     }
 }
+
+

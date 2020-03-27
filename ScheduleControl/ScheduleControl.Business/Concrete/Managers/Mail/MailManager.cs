@@ -19,15 +19,6 @@ namespace ScheduleControl.Business.Concrete.Managers.Mail
             _userService = userService;
         }
 
-        public async Task SendMailAsync(MailMessageDto mailMessageDto)
-        {
-            MailMessage mailMessage = mailMessageDto.GetMailMessage();
-            mailMessage.From = new MailAddress(_smtpConfigDto.User);
-
-            using var client = CreateSmtpClient();
-            await client.SendMailAsync(mailMessage);
-        }
-
         public async Task SendUserRegisterMailAsync(int userId)
         {
             using var client = CreateSmtpClient();
@@ -53,6 +44,17 @@ namespace ScheduleControl.Business.Concrete.Managers.Mail
             smtp.Credentials = new NetworkCredential(_smtpConfigDto.User, _smtpConfigDto.Password);
             smtp.EnableSsl = _smtpConfigDto.UseSsl;
             return smtp;
+        }
+
+
+
+        public async Task SendMailAsync(MailMessageDto mailMessageDto)
+        {
+            MailMessage mailMessage = mailMessageDto.GetMailMessage();
+            mailMessage.From = new MailAddress(_smtpConfigDto.User);
+
+            using var client = CreateSmtpClient();
+            await client.SendMailAsync(mailMessage);
         }
     }
 }

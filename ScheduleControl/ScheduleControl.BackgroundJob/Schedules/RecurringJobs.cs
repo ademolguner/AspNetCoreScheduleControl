@@ -12,24 +12,13 @@ namespace ScheduleControl.BackgroundJob.Schedules
         [Obsolete]
         public static void DatabaseBackupOperation()
         {
-            /*
-                  RemoveIfExists yöntemini çağırarak var olan yinelenen bir işi kaldırabilirsiniz. 
-                  Böyle tekrar eden bir iş olmadığında bir istisna oluşturmaz
-             */
+            /*  RemoveIfExists yöntemini çağırarak var olan yinelenen bir işi kaldırabilirsiniz. 
+                Böyle tekrar eden bir iş olmadığında bir istisna oluşturmaz */
             RecurringJob.RemoveIfExists(nameof(DataBaseBackupScheduleJobManager));
             RecurringJob.AddOrUpdate<DataBaseBackupScheduleJobManager>(nameof(DataBaseBackupScheduleJobManager),
-                job => job.Process(),
-                 "59 23 * * *", TimeZoneInfo.Local);
-        }
-
-        [Obsolete]
-        public static void OtomatikOperationBir()
-        {
-        }
-
-        [Obsolete]
-        public static void OtomatikOperasyonIki()
-        {
+                job => job.Process(),"59 23 * * *", TimeZoneInfo.Local);
         } 
     }
 }
+
+

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ScheduleControl.BackgroundJob;
+using ScheduleControl.BackgroundJob.Schedules;
 using ScheduleControl.Business.Abstract;
 using ScheduleControl.Business.Abstract.Auth;
 using ScheduleControl.Business.Abstract.DatabaseOperation;
@@ -33,7 +34,7 @@ namespace ScheduleControl.WebUI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration["ConnectionStrings:ProjectDev"];
@@ -55,7 +56,8 @@ namespace ScheduleControl.WebUI
 
                 config.UseSqlServerStorage(hangfireConnectionString, option)
                       .WithJobExpirationTimeout(TimeSpan.FromHours(6));
-            });
+           
+              });
 
 
 
@@ -89,7 +91,9 @@ namespace ScheduleControl.WebUI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         [Obsolete]
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -102,45 +106,39 @@ namespace ScheduleControl.WebUI
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            //app.UseHangfireDashboard();
-            app.UseHangfireDashboard("/hangfire", new DashboardOptions
-            {
-                DashboardTitle = "Adem Olguner'in Hangfire DashBoard Title adı",
-                Authorization = new[] { new HangfireDashboardAuthorizationFilter() }
-            });
-
-            //app.UseHangfireServer();
-            app.UseHangfireServer(new BackgroundJobServerOptions
-            {
-                /* 
-                    Hangfire Server, planlanan işleri sıralarına göre sıralamak için zamanlamayı düzenli olarak denetler ve 
-                    çalışanların bunları yürütmesine olanak tanır. 
-                    Varsayılan olarak, kontrol aralığı 15 saniyeye eşittir, ancak BackgroundJobServer yapıcısına ilettiğiniz seçeneklerde 
-                    SchedulePollingInterval özelliğini ayarlayarak değiştirebilirsiniz   
-                */
-                SchedulePollingInterval = TimeSpan.FromSeconds(30),
-                WorkerCount = Environment.ProcessorCount * 5
-            });
-
+            app.UseStaticFiles(); 
             app.UseRouting();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            //app.UseHangfireDashboard();  
+            app.UseHangfireDashboard("/ademolgunerhangfire", new DashboardOptions
+            {
+                DashboardTitle = "Adem Olguner Hangfire DashBoard",  // Dashboard sayfasına ait Başlık alanını değiştiririz.
+                AppPath = "/Home/HangfireAbout",                     // Dashboard üzerinden "back to site" button
+                Authorization = new[] { new HangfireDashboardAuthorizationFilter() },   // Güvenlik için Authorization İşlemleri
+            });
+            //app.UseHangfireServer();
+            app.UseHangfireServer(new BackgroundJobServerOptions
+            {
+                /*  Hangfire Server, planlanan işleri sıralarına göre sıralamak için zamanlamayı düzenli olarak denetler ve 
+                    çalışanların bunları yürütmesine olanak tanır. 
+                    Varsayılan olarak, kontrol aralığı 15 saniyeye eşittir, ancak BackgroundJobServer yapıcısına ilettiğiniz seçeneklerde 
+                    SchedulePollingInterval özelliğini ayarlayarak değiştirebilirsiniz    */
+                SchedulePollingInterval = TimeSpan.FromSeconds(30),
 
+                //Arkaplanda çalışacak Job sayısını değiştirebiliriz.
+                WorkerCount = Environment.ProcessorCount * 5
+            });
             GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute { Attempts = 7 });
 
             // Tanımlanan zaman diliminde sürekli çalıştığı için tetiklenmesine gerek yok, 
             // burada tanımlayabiliriz. tanımlayabiliriz.  
-            BackgroundJob.Schedules.RecurringJobs.DatabaseBackupOperation();
-
-
+            RecurringJobs.DatabaseBackupOperation();
         }
     }
 }

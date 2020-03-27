@@ -10,8 +10,8 @@ namespace ScheduleControl.BackgroundJob
         public bool Authorize([NotNull]DashboardContext context)
         {
             var httpContext = context.GetHttpContext();
-            var useRole = "Admin";// httpContext.User.FindFirst(ClaimTypes.Role)?.Value;
-            return useRole == AppRoles.RoleEnums.Admin.ToString();
+            var useRole = "HangfireOpenUser";// httpContext.User.FindFirst(ClaimTypes.Role)?.Value;
+            return useRole == AppRoles.RoleEnums.HangfireOpenUser.ToString();
         }
     }
 }

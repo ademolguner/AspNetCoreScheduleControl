@@ -15,7 +15,7 @@ namespace ScheduleControl.WebUI.Controllers
             _logger = logger;
         }
 
-        [Obsolete]
+         
         public IActionResult Index()
         {
             // bir takım işlemler ve sponrasında mail tetikleniyor
@@ -23,6 +23,16 @@ namespace ScheduleControl.WebUI.Controllers
             //DelayedJobs.SendMailJobs();
             return View();
         }
+        [HttpGet]
+        public IActionResult HangfireAbout()
+        {
+            // bir takım işlemler ve sponrasında mail tetikleniyor
+            //FireAndForgetJobs.CheckCurrencyDataRefresh();
+            //DelayedJobs.SendMailJobs();
+            return View();
+        }
+
+
 
         public IActionResult Privacy()
         {

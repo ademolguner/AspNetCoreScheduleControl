@@ -37,6 +37,9 @@ namespace ScheduleControl.WebUI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+
+
         [HttpGet("Login")]
         public PartialViewResult Login()
         {
